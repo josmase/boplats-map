@@ -1,0 +1,56 @@
+{
+  "name": "boplats-map-scraper",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/boplats-map-scraper/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/boplats-map-scraper",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/boplats-map-scraper/src/main.ts",
+        "tsConfig": "apps/boplats-map-scraper/tsconfig.app.json",
+        "assets": ["apps/boplats-map-scraper/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "boplats-map-scraper:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "boplats-map-scraper:build:development"
+        },
+        "production": {
+          "buildTarget": "boplats-map-scraper:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
