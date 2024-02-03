@@ -1,21 +1,21 @@
 {
-  "name": "boplats-map-api",
+  "name": "api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/boplats-map-api/src",
+  "sourceRoot": "apps/api/src",
   "projectType": "application",
   "targets": {
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "boplats-map-api:build"
+        "buildTarget": "api:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "boplats-map-api:build:development"
+          "buildTarget": "api:build:development"
         },
         "production": {
-          "buildTarget": "boplats-map-api:build:production"
+          "buildTarget": "api:build:production"
         }
       }
     }

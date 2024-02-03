@@ -1,7 +1,7 @@
 {
-  "name": "boplats-map-frontend",
+  "name": "frontend",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/boplats-map-frontend/src",
+  "sourceRoot": "apps/frontend/src",
   "targets": {}
 }

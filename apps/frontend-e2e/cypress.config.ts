@@ -7,7 +7,7 @@ export default defineConfig({
     ...nxE2EPreset(__filename, {
       cypressDir: 'src',
       bundler: 'vite',
-      webServerCommands: { default: 'nx run boplats-map-frontend:serve' },
+      webServerCommands: { default: 'nx run frontend:serve' },
     }),
     baseUrl: 'http://localhost:4200',
   },

@@ -6,6 +6,6 @@ import App from './App.vue';
 describe('App', () => {
   it('renders properly', () => {
     const wrapper = mount(App, {});
-    expect(wrapper.text()).toContain('Welcome boplats-map-frontend 👋');
+    expect(wrapper.text()).toContain('Welcome frontend 👋');
   });
 });

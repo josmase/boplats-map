@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'boplats-map-scraper-e2e',
+  displayName: 'scraper-e2e',
   preset: '../..//jest.preset.js',
   setupFiles: ['<rootDir>/src/test-setup.ts'],
   testEnvironment: 'node',
@@ -13,5 +13,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../..//coverage/boplats-map-scraper-e2e',
+  coverageDirectory: '../..//coverage/scraper-e2e',
 };

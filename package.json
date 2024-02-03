@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:api": "nx serve boplats-map-api",
-    "start:frontend": "nx serve boplats-map-frontend",
-    "start:scraper": "nx serve boplats-map-scraper",
-    "test:api": "nx test boplats-map-api",
-    "test:frontend": "nx test boplats-map-frontend",
-    "test:scraper": "nx test boplats-map-scraper",
-    "test-watch:api": "nx test boplats-map-api --watch",
-    "test-watch:frontend": "nx test boplats-map-frontend --watch",
-    "test-watch:scraper": "nx test boplats-map-scraper --watch"
+    "start:api": "nx serve api",
+    "start:frontend": "nx serve frontend",
+    "start:scraper": "nx serve scraper",
+    "test:api": "nx test api",
+    "test:frontend": "nx test frontend",
+    "test:scraper": "nx test scraper",
+    "test-watch:api": "nx test api --watch",
+    "test-watch:frontend": "nx test frontend --watch",
+    "test-watch:scraper": "nx test scraper --watch"
   },
   "private": true,
   "dependencies": {
