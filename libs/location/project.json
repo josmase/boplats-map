@@ -1,7 +1,7 @@
 {
-  "name": "location-repository",
+  "name": "location",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/location-repository/src",
+  "sourceRoot": "libs/location/src",
   "projectType": "library",
   "targets": {},
   "tags": []

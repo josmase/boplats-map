@@ -6,7 +6,7 @@ import {
   parseRoomCount,
   parseSize,
 } from './apartment-parser-helpers';
-import { Apartment } from '@boplats-map/apartment-repository';
+import { Apartment } from '@boplats-map/apartment';
 
 export function parseApartments($: cheerio.CheerioAPI): Partial<Apartment>[] {
   let apartments: Partial<Apartment>[] = [];

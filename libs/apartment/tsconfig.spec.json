@@ -10,5 +10,5 @@
     "src/**/*.test.ts",
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
-, "../location-repository/src/lib/location-repository.spec.ts"  ]
+, "../location/src/lib/location-repository.spec.ts"  ]
 }

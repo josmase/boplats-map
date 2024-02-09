@@ -1,4 +1,4 @@
-import { upsertApartment } from '@boplats-map/apartment-repository';
+import { upsertApartment } from '@boplats-map/apartment';
 import { scrapeApartments } from '@boplats-map/apartment-scraper';
 import { connectToDatabase } from '@boplats-map/database-utils';
 

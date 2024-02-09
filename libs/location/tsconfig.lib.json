@@ -7,5 +7,5 @@
     "types": ["node"]
   },
   "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
-  "include": ["src/**/*.ts", "../location-repository/src/lib/location-model.ts", "../location-repository/src/lib/location-repository.spec.ts", "../location-repository/src/lib/location-repository.ts", "../location-repository/src/lib/location.ts"]
+  "include": ["src/**/*.ts"]
 }

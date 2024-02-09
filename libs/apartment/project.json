@@ -1,7 +1,7 @@
 {
-  "name": "apartment-repository",
+  "name": "apartment",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/apartment-repository/src",
+  "sourceRoot": "libs/apartment/src",
   "projectType": "library",
   "targets": {},
   "tags": []

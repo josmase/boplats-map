@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'apartment-repository',
+  displayName: 'location',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/libs/apartment-repository',
+  coverageDirectory: '../../coverage/libs/location',
 };
