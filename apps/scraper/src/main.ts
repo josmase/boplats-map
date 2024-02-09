@@ -1,24 +1,25 @@
-import * as cheerio from 'cheerio';
-import { parseApartments } from './parser/apartment-parser';
+import { upsertApartment } from '@boplats-map/apartment-repository';
+import { scrapeApartments } from '@boplats-map/apartment-scraper';
+import { connectToDatabase } from '@boplats-map/database-utils';
 
 const url =
+  process.env.BOPLATS_SEARCH_URI ||
   'https://nya.boplats.se/sok?types=1hand&area=508A8CB406FE001F00030A60';
 
-async function search() {
-  try {
-    const res = await fetch(url);
-    const html = await res.text();
-    const $ = cheerio.load(html);
+const dbConfig = {
+  uri:
+    process.env.DB_URI || 'mongodb://localhost:27017/boplats?authSource=admin',
+  username: process.env.DB_USERNAME || 'root',
+  password: process.env.DB_PASSWORD || 'example',
+};
 
-    const apartments = parseApartments($);
-    console.dir(apartments);
-  } catch (error) {
-    console.log(error);
-  }
+async function run() {
+  await connectToDatabase(dbConfig);
+  const apartments = await scrapeApartments(url);
+  const pendingApartments = apartments.map((apartment) =>
+    upsertApartment(apartment)
+  );
+  await Promise.all(pendingApartments);
 }
 
-search();
-
-function parseApartment(apartment: number): any {
-  throw new Error('Function not implemented.');
-}
+run();

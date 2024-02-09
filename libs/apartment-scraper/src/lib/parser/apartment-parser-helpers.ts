@@ -1,5 +1,5 @@
 import { parseISO } from 'date-fns';
-import { Floor, Price, Size } from '../aparment';
+import { Floor, Price, Size } from '@boplats-map/apartment-repository';
 
 export function parsePrice(price: string): Price | null {
   const regex = /^(\d[\d\s]*)\s+(\w+)$/;

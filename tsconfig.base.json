@@ -18,6 +18,7 @@
       "@boplats-map/apartment-repository": [
         "libs/apartment-repository/src/index.ts"
       ],
+      "@boplats-map/apartment-scraper": ["libs/apartment-scraper/src/index.ts"],
       "@boplats-map/database-utils": ["libs/database-utils/src/index.ts"],
       "@boplats-map/location-repository": [
         "libs/location-repository/src/index.ts"

@@ -1,0 +1,8 @@
+{
+  "name": "apartment-scraper",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/apartment-scraper/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}

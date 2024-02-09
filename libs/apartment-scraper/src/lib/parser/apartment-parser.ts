@@ -1,6 +1,4 @@
 import * as cheerio from 'cheerio';
-import { parseISO } from 'date-fns';
-import { Apartment, Floor, Price, Size } from '../aparment';
 import {
   parseFloor,
   parsePrice,
@@ -8,9 +6,10 @@ import {
   parseRoomCount,
   parseSize,
 } from './apartment-parser-helpers';
+import { Apartment } from '@boplats-map/apartment-repository';
 
-export function parseApartments($: cheerio.CheerioAPI): Apartment[] {
-  let apartments: Apartment[] = [];
+export function parseApartments($: cheerio.CheerioAPI): Partial<Apartment>[] {
+  let apartments: Partial<Apartment>[] = [];
 
   $('.item').each((index, resultItem) => {
     const apartment = parseApartment($, resultItem);
@@ -23,7 +22,7 @@ export function parseApartments($: cheerio.CheerioAPI): Apartment[] {
 function parseApartment(
   $: cheerio.CheerioAPI,
   resultItem: cheerio.Element
-): Apartment {
+): Partial<Apartment> {
   const link = $(resultItem).find('.search-result-link').attr('href');
   const imageUrls = $(resultItem)
     .find('.mob-thumb img')
@@ -49,7 +48,6 @@ function parseApartment(
     size: parseSize(size),
     floor: parseFloor(floorInfo),
     roomCount: parseRoomCount(roomCount),
-    published: parsePublicationDate(publDate, new Date()),
-    updated: new Date(),
+    publishedAt: parsePublicationDate(publDate, new Date()),
   };
 }
