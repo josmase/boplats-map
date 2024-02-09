@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@boplats-map/apartment-repository": [
+        "libs/apartment-repository/src/index.ts"
+      ],
       "@boplats-map/database-utils": ["libs/database-utils/src/index.ts"],
     }
   },
