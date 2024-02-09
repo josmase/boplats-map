@@ -19,6 +19,9 @@
         "libs/apartment-repository/src/index.ts"
       ],
       "@boplats-map/database-utils": ["libs/database-utils/src/index.ts"],
+      "@boplats-map/location-repository": [
+        "libs/location-repository/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
