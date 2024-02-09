@@ -11,7 +11,8 @@
     "test:scraper": "nx test scraper",
     "test-watch:api": "nx test api --watch",
     "test-watch:frontend": "nx test frontend --watch",
-    "test-watch:scraper": "nx test scraper --watch"
+    "test-watch:scraper": "nx test scraper --watch",
+    "start:containers": "docker compose -f development-containers/mongodb.yaml up"
   },
   "private": true,
   "dependencies": {
@@ -66,6 +67,7 @@
     "jest": "^29.4.1",
     "jest-environment-node": "^29.4.1",
     "jsdom": "~22.1.0",
+    "mongoose": "^8.1.1",
     "nx": "18.0.0",
     "prettier": "^2.6.2",
     "sass": "1.62.1",
