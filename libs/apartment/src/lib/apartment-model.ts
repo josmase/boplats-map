@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { Apartment } from './aparment';
+import { Apartment } from './apartment';
 
 const apartmentSchema = new Schema<Apartment>({
   link: { type: String, required: true, unique: true },

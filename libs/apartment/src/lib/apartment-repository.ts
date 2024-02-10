@@ -1,8 +1,8 @@
 import { FilterQuery, Model } from 'mongoose';
-import { Apartment } from './aparment';
+import { Apartment } from './apartment';
 import { ApartmentModel } from './apartment-model';
 
-class ApartmentRepository {
+export class ApartmentRepository {
   constructor(private readonly model: Model<ApartmentModel>) {}
 
   async upsertApartment(
@@ -44,4 +44,6 @@ class ApartmentRepository {
   }
 }
 
-export { ApartmentRepository };
+export function createApartmentRepository() {
+  return new ApartmentRepository(ApartmentModel);
+}
