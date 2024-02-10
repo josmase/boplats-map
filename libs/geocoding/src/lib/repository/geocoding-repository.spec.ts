@@ -15,6 +15,7 @@ describe('GeocodingRepository', () => {
     it('should call model.create with correct parameters', async () => {
       const queryId = 'testQueryId';
       const feature: GeocodingFeature = {
+        queryId: 'queryId',
         type: 'Feature',
         properties: {
           place_id: 123,
@@ -33,21 +34,21 @@ describe('GeocodingRepository', () => {
           type: 'Point',
           coordinates: [5, 6],
         },
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
       (GeocodingFeatureModel.create as jest.Mock).mockResolvedValue(feature);
 
       await geocodingRepository.create(queryId, feature);
 
-      expect(GeocodingFeatureModel.create).toHaveBeenCalledWith({
-        _id: queryId,
-        ...feature,
-      });
+      expect(GeocodingFeatureModel.create).toHaveBeenCalledWith(feature);
     });
 
     it('should return the created feature', async () => {
       const queryId = 'testQueryId';
       const feature: GeocodingFeature = {
+        queryId: queryId,
         type: 'Feature',
         properties: {
           place_id: 123,
@@ -66,6 +67,8 @@ describe('GeocodingRepository', () => {
           type: 'Point',
           coordinates: [5, 6],
         },
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
       (GeocodingFeatureModel.create as jest.Mock).mockResolvedValue(feature);
@@ -78,18 +81,19 @@ describe('GeocodingRepository', () => {
 
   describe('findById', () => {
     it('should call model.findOne with correct _id', async () => {
-      const _id = 'testId';
+      const queryId = 'testId';
 
       (GeocodingFeatureModel.findOne as jest.Mock).mockResolvedValue(null);
 
-      await geocodingRepository.findById(_id);
+      await geocodingRepository.findById(queryId);
 
-      expect(GeocodingFeatureModel.findOne).toHaveBeenCalledWith({ _id });
+      expect(GeocodingFeatureModel.findOne).toHaveBeenCalledWith({ queryId });
     });
 
     it('should return the found feature', async () => {
-      const _id = 'testId';
+      const queryId = 'testId';
       const feature: GeocodingFeature = {
+        queryId: queryId,
         type: 'Feature',
         properties: {
           place_id: 123,
@@ -108,11 +112,13 @@ describe('GeocodingRepository', () => {
           type: 'Point',
           coordinates: [5, 6],
         },
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
 
       (GeocodingFeatureModel.findOne as jest.Mock).mockResolvedValue(feature);
 
-      const result = await geocodingRepository.findById(_id);
+      const result = await geocodingRepository.findById(queryId);
 
       expect(result).toEqual(feature);
     });

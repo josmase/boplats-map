@@ -1,6 +1,7 @@
 import { GeocodingClient } from './nominatim/geocoding-client';
 import { StructuredQuery } from './nominatim/request';
 import { GeocodingFeature, GeocodingResponse } from './nominatim/response';
+import { GeocodingFeatureModel } from './repository/geocoding-model';
 import { GeocodingRepository } from './repository/geocoding-repository';
 
 export class GeocodingService {
@@ -49,4 +50,22 @@ export class GeocodingService {
     );
     return sortedFeatures.length > 0 ? sortedFeatures[0] : null;
   }
+}
+
+interface GeoCodingConfig {
+  userAgent: string;
+  apiUrl: string;
+  timeBetweenRequestsMs: number;
+}
+
+export function createGeoCodingService({
+  userAgent,
+  apiUrl,
+  timeBetweenRequestsMs,
+}: GeoCodingConfig) {
+  return new GeocodingService(
+    new GeocodingClient(userAgent, apiUrl),
+    new GeocodingRepository(GeocodingFeatureModel),
+    timeBetweenRequestsMs
+  );
 }

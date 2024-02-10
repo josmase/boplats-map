@@ -28,6 +28,7 @@ describe('GeocodingService', () => {
         const query: Partial<StructuredQuery> = { city: 'New York' };
         const queryId = 'hashedQueryId';
         const geocodingFeature: GeocodingFeature = {
+          queryId: queryId,
           type: 'Feature',
           properties: {
             place_id: 123,
@@ -46,6 +47,8 @@ describe('GeocodingService', () => {
             type: 'Point',
             coordinates: [-74.006, 40.7128],
           },
+          createdAt: new Date(),
+          updatedAt: new Date(),
         };
         const response: GeocodingResponse = {
           type: 'Mock type',
@@ -78,6 +81,7 @@ describe('GeocodingService', () => {
         const query: Partial<StructuredQuery> = { city: 'New York' };
         const queryId = 'hashedQueryId';
         const existingMatch: GeocodingFeature = {
+          queryId: queryId,
           type: 'Feature',
           properties: {
             place_id: 123,
@@ -96,6 +100,8 @@ describe('GeocodingService', () => {
             type: 'Point',
             coordinates: [-74.006, 40.7128],
           },
+          createdAt: new Date(),
+          updatedAt: new Date(),
         };
 
         // Mock the methods and return values
@@ -120,6 +126,7 @@ describe('GeocodingService', () => {
         const query = 'New York';
         const queryId = 'hashedQueryId';
         const geocodingFeature: GeocodingFeature = {
+          queryId: queryId,
           type: 'Feature',
           properties: {
             place_id: 123,
@@ -138,6 +145,8 @@ describe('GeocodingService', () => {
             type: 'Point',
             coordinates: [-74.006, 40.7128],
           },
+          createdAt: new Date(),
+          updatedAt: new Date(),
         };
         const response: GeocodingResponse = {
           type: 'Mock type',
@@ -168,6 +177,7 @@ describe('GeocodingService', () => {
         const query = 'New York';
         const queryId = 'hashedQueryId';
         const geocodingFeature: GeocodingFeature = {
+          queryId: queryId,
           type: 'Feature',
           properties: {
             place_id: 123,
@@ -186,6 +196,8 @@ describe('GeocodingService', () => {
             type: 'Point',
             coordinates: [-74.006, 40.7128],
           },
+          createdAt: new Date(),
+          updatedAt: new Date(),
         };
 
         (geocodingClient.hashQuery as jest.Mock).mockReturnValue(queryId);

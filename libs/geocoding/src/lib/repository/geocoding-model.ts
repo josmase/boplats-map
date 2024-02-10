@@ -2,6 +2,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 import { GeocodingFeature } from '../nominatim/response';
 
 const GeocodingFeatureSchema = new Schema<GeocodingFeature>({
+  queryId: { type: String, required: true, unique: true },
   type: String,
   properties: {
     place_id: Number,
@@ -20,9 +21,18 @@ const GeocodingFeatureSchema = new Schema<GeocodingFeature>({
     type: String,
     coordinates: [Number],
   },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
-export interface GeocodingFeatureModel extends GeocodingFeature, Document {}
+GeocodingFeatureSchema.pre<GeocodingFeature>('save', function (next) {
+  this.updatedAt = new Date();
+  next();
+});
+
+export interface GeocodingFeatureModel
+  extends GeocodingFeature,
+    Document<string> {}
 export const GeocodingFeatureModel = mongoose.model<GeocodingFeatureModel>(
   'GeocodingFeature',
   GeocodingFeatureSchema

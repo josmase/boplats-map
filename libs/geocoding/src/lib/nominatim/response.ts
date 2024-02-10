@@ -5,6 +5,7 @@ export interface GeocodingResponse {
 }
 
 export interface GeocodingFeature {
+  queryId: string;
   type: string;
   properties: {
     place_id: number;
@@ -23,4 +24,6 @@ export interface GeocodingFeature {
     type: string;
     coordinates: [number, number];
   };
+  createdAt: Date;
+  updatedAt: Date;
 }
