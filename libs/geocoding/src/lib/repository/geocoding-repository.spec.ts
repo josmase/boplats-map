@@ -1,5 +1,4 @@
-import { GeocodingFeature, GeocodingResponse } from '../nominatim/response';
-import { GeocodingFeatureModel } from './geocoding-model';
+import { GeocodingFeature, GeocodingFeatureModel } from './geocoding-model';
 import { GeocodingRepository } from './geocoding-repository';
 
 jest.mock('./geocoding-model');
@@ -40,7 +39,7 @@ describe('GeocodingRepository', () => {
 
       (GeocodingFeatureModel.create as jest.Mock).mockResolvedValue(feature);
 
-      await geocodingRepository.create(queryId, feature);
+      await geocodingRepository.create(feature);
 
       expect(GeocodingFeatureModel.create).toHaveBeenCalledWith(feature);
     });
@@ -73,7 +72,7 @@ describe('GeocodingRepository', () => {
 
       (GeocodingFeatureModel.create as jest.Mock).mockResolvedValue(feature);
 
-      const result = await geocodingRepository.create(queryId, feature);
+      const result = await geocodingRepository.create(feature);
 
       expect(result).toEqual(feature);
     });

@@ -1,5 +1,11 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import { GeocodingFeature } from '../nominatim/response';
+import { GeocodingFeatureResponse } from '../nominatim/response';
+
+export interface GeocodingFeature extends GeocodingFeatureResponse {
+  queryId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const GeocodingFeatureSchema = new Schema<GeocodingFeature>(
   {

@@ -1,8 +1,11 @@
 import { hashQuery } from './key-hasher';
 import { GeocodingClient } from './nominatim/geocoding-client';
 import { StructuredQuery } from './nominatim/request';
-import { GeocodingFeature, GeocodingResponse } from './nominatim/response';
-import { GeocodingFeatureModel } from './repository/geocoding-model';
+import { GeocodingFeatureResponse } from './nominatim/response';
+import {
+  GeocodingFeature,
+  GeocodingFeatureModel,
+} from './repository/geocoding-model';
 import { GeocodingRepository } from './repository/geocoding-repository';
 
 export class GeocodingService {
@@ -29,7 +32,10 @@ export class GeocodingService {
       const response = await this.makeRateLimitedRequest(query);
 
       const bestMatchForQuery = this.getBestMatch(response.features);
-      return await this.geocodingRepository.create(queryId, bestMatchForQuery);
+      return await this.geocodingRepository.create({
+        queryId,
+        ...bestMatchForQuery,
+      });
     } catch (error) {
       throw new Error(
         `Error fetching and saving geocoding data: ${error.message}`
@@ -59,7 +65,7 @@ export class GeocodingService {
     }
   }
 
-  private getBestMatch(features: GeocodingFeature[]) {
+  private getBestMatch(features: GeocodingFeatureResponse[]) {
     const sortedFeatures = [...features].sort(
       (feature1, feature2) =>
         feature1.properties.place_rank - feature2.properties.place_rank

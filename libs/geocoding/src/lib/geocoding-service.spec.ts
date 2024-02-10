@@ -1,9 +1,10 @@
 import { GeocodingClient } from './nominatim/geocoding-client';
-import { GeocodingFeature, GeocodingResponse } from './nominatim/response';
+import { GeocodingResponse } from './nominatim/response';
 import { GeocodingRepository } from './repository/geocoding-repository';
 import { GeocodingService } from './geocoding-service';
 import { StructuredQuery } from './nominatim/request';
 import { hashQuery } from './key-hasher';
+import { GeocodingFeature } from './repository/geocoding-model';
 
 jest.mock('./nominatim/geocoding-client');
 jest.mock('./repository/geocoding-repository');
@@ -75,7 +76,6 @@ describe('GeocodingService', () => {
         expect(geocodingClient.geocode).toHaveBeenCalledWith(query);
         expect(geocodingRepository.findById).toHaveBeenCalledWith(queryId);
         expect(geocodingRepository.create).toHaveBeenCalledWith(
-          queryId,
           geocodingFeature
         );
       });
@@ -170,7 +170,6 @@ describe('GeocodingService', () => {
         expect(geocodingClient.geocode).toHaveBeenCalledWith(query);
         expect(geocodingRepository.findById).toHaveBeenCalledWith(queryId);
         expect(geocodingRepository.create).toHaveBeenCalledWith(
-          queryId,
           geocodingFeature
         );
       });

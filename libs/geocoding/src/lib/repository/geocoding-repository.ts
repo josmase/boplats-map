@@ -1,17 +1,15 @@
 import { Model, isObjectIdOrHexString } from 'mongoose';
-import { GeocodingFeature, GeocodingResponse } from '../nominatim/response';
-import { GeocodingFeatureModel } from './geocoding-model';
+import { GeocodingFeature, GeocodingFeatureModel } from './geocoding-model';
 
 export class GeocodingRepository {
   constructor(private readonly model: Model<GeocodingFeatureModel>) {}
 
   async create(
-    queryId: string,
-    feature: GeocodingFeature | GeocodingFeatureModel
+    feature: Partial<GeocodingFeature> | GeocodingFeatureModel
   ): Promise<GeocodingFeature | GeocodingFeatureModel> {
-    console.debug(`${queryId}: Creating feature`);
-    const savedFeature = await this.model.create({ queryId, ...feature });
-    console.debug(`${queryId}: Created feature`);
+    console.debug(`${feature.queryId}: Creating feature`);
+    const savedFeature = await this.model.create(feature);
+    console.debug(`${feature.queryId}: Created feature`);
     return savedFeature;
   }
 

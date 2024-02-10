@@ -1,11 +1,10 @@
 export interface GeocodingResponse {
   type: string;
   licence: string;
-  features: GeocodingFeature[];
+  features: GeocodingFeatureResponse[];
 }
 
-export interface GeocodingFeature {
-  queryId: string;
+export interface GeocodingFeatureResponse {
   type: string;
   properties: {
     place_id: number;
@@ -24,6 +23,4 @@ export interface GeocodingFeature {
     type: string;
     coordinates: [number, number];
   };
-  createdAt: Date;
-  updatedAt: Date;
 }
