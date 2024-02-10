@@ -18,8 +18,7 @@ const dbConfig = {
 const geocodingConfig = {
   userAgent: process.env.USER_AGENT || 'Boplats-Map',
   apiUrl: process.env.API_URL || 'https://nominatim.openstreetmap.org',
-  timeBetweenRequestsMs:
-    parseInt(process.env.TIME_BETWEEN_REQUESTS_MS) || 10000,
+  timeBetweenRequestsMs: parseInt(process.env.TIME_BETWEEN_REQUESTS_MS) || 1500,
 };
 
 const geocodingService = createGeoCodingService(geocodingConfig);
