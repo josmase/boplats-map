@@ -3,11 +3,7 @@ import { Apartment } from './aparment';
 import { ApartmentModel } from './apartment-model';
 
 class ApartmentRepository {
-  private readonly model: Model<ApartmentModel>;
-
-  constructor(model: Model<ApartmentModel>) {
-    this.model = model;
-  }
+  constructor(private readonly model: Model<ApartmentModel>) {}
 
   async upsertApartment(
     apartmentData: Partial<Apartment | ApartmentModel>
