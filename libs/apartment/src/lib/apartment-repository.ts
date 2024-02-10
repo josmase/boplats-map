@@ -1,16 +1,17 @@
 import { FilterQuery, Model } from 'mongoose';
 import { Apartment } from './aparment';
+import { ApartmentModel } from './apartment-model';
 
 class ApartmentRepository {
-  private readonly model: Model<Apartment>;
+  private readonly model: Model<ApartmentModel>;
 
-  constructor(model: Model<Apartment>) {
+  constructor(model: Model<ApartmentModel>) {
     this.model = model;
   }
 
   async upsertApartment(
-    apartmentData: Partial<Apartment>
-  ): Promise<Apartment | null> {
+    apartmentData: Partial<Apartment | ApartmentModel>
+  ): Promise<Apartment | ApartmentModel | null> {
     try {
       const result = await this.model.findOneAndUpdate(
         { link: apartmentData.link },
@@ -24,7 +25,9 @@ class ApartmentRepository {
     }
   }
 
-  async deleteApartment(_id: string): Promise<Apartment | null> {
+  async deleteApartment(
+    _id: string
+  ): Promise<Apartment | ApartmentModel | null> {
     try {
       const result = await this.model.findOneAndDelete({ _id });
       return result;
@@ -33,7 +36,9 @@ class ApartmentRepository {
     }
   }
 
-  async searchApartments(query: FilterQuery<Apartment>): Promise<Apartment[]> {
+  async searchApartments(
+    query: FilterQuery<Apartment>
+  ): Promise<Apartment[] | ApartmentModel[]> {
     try {
       const results = await this.model.find(query);
       return results;

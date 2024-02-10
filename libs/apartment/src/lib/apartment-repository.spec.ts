@@ -4,7 +4,7 @@ import { ApartmentModel } from './apartment-model';
 jest.mock('./apartment-model');
 
 describe('ApartmentRepository', () => {
-  let apartmentRepository = new ApartmentRepository(ApartmentModel as any);
+  let apartmentRepository = new ApartmentRepository(ApartmentModel);
 
   beforeEach(() => {
     jest.clearAllMocks();
