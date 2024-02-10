@@ -20,6 +20,7 @@ export class GeocodingClient {
     const url = `${this.apiUrl}?${queryParams}`;
 
     try {
+      console.debug('Attempting to geocode:', url);
       const response = await fetch(url, {
         headers: {
           'User-Agent': this.userAgent,
@@ -49,10 +50,5 @@ export class GeocodingClient {
 
     const queryParams = new URLSearchParams(params);
     return queryParams;
-  }
-
-  hashQuery(query: string | Partial<StructuredQuery>): string {
-    const normalizedQuery = JSON.stringify(this.createQueryParams(query));
-    return createHash('sha1').update(normalizedQuery).digest('base64');
   }
 }

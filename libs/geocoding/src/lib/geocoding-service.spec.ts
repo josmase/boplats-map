@@ -3,9 +3,11 @@ import { GeocodingFeature, GeocodingResponse } from './nominatim/response';
 import { GeocodingRepository } from './repository/geocoding-repository';
 import { GeocodingService } from './geocoding-service';
 import { StructuredQuery } from './nominatim/request';
+import { hashQuery } from './key-hasher';
 
 jest.mock('./nominatim/geocoding-client');
 jest.mock('./repository/geocoding-repository');
+jest.mock('./key-hasher');
 
 describe('GeocodingService', () => {
   let geocodingClient: GeocodingClient;
@@ -57,7 +59,7 @@ describe('GeocodingService', () => {
         };
 
         // Mock the methods and return values
-        (geocodingClient.hashQuery as jest.Mock).mockReturnValue(queryId);
+        (hashQuery as jest.Mock).mockReturnValue(queryId);
         (geocodingClient.geocode as jest.Mock).mockResolvedValue(response);
         (geocodingRepository.findById as jest.Mock).mockResolvedValue(null);
         (geocodingRepository.create as jest.Mock).mockResolvedValue(
@@ -69,7 +71,7 @@ describe('GeocodingService', () => {
 
         // Assertions
         expect(result).toEqual(geocodingFeature);
-        expect(geocodingClient.hashQuery).toHaveBeenCalledWith(query);
+        expect(hashQuery).toHaveBeenCalledWith(query);
         expect(geocodingClient.geocode).toHaveBeenCalledWith(query);
         expect(geocodingRepository.findById).toHaveBeenCalledWith(queryId);
         expect(geocodingRepository.create).toHaveBeenCalledWith(
@@ -105,7 +107,7 @@ describe('GeocodingService', () => {
         };
 
         // Mock the methods and return values
-        (geocodingClient.hashQuery as jest.Mock).mockReturnValue(queryId);
+        (hashQuery as jest.Mock).mockReturnValue(queryId);
         (geocodingRepository.findById as jest.Mock).mockResolvedValue(
           existingMatch
         );
@@ -115,7 +117,7 @@ describe('GeocodingService', () => {
 
         // Assertions
         expect(result).toEqual(existingMatch);
-        expect(geocodingClient.hashQuery).toHaveBeenCalledWith(query);
+        expect(hashQuery).toHaveBeenCalledWith(query);
         expect(geocodingRepository.findById).toHaveBeenCalledWith(queryId);
         expect(geocodingClient.geocode).not.toHaveBeenCalled(); // Ensure geocode method was not called
         expect(geocodingRepository.create).not.toHaveBeenCalled(); // Ensure create method was not called
@@ -154,7 +156,7 @@ describe('GeocodingService', () => {
           features: [geocodingFeature],
         };
 
-        (geocodingClient.hashQuery as jest.Mock).mockReturnValue(queryId);
+        (hashQuery as jest.Mock).mockReturnValue(queryId);
         (geocodingClient.geocode as jest.Mock).mockResolvedValue(response);
         (geocodingRepository.findById as jest.Mock).mockResolvedValue(null);
         (geocodingRepository.create as jest.Mock).mockResolvedValue(
@@ -164,7 +166,7 @@ describe('GeocodingService', () => {
         const result = await geocodingService.fetchAndSaveGeocodingData(query);
 
         expect(result).toEqual(geocodingFeature);
-        expect(geocodingClient.hashQuery).toHaveBeenCalledWith(query);
+        expect(hashQuery).toHaveBeenCalledWith(query);
         expect(geocodingClient.geocode).toHaveBeenCalledWith(query);
         expect(geocodingRepository.findById).toHaveBeenCalledWith(queryId);
         expect(geocodingRepository.create).toHaveBeenCalledWith(
@@ -200,7 +202,7 @@ describe('GeocodingService', () => {
           updatedAt: new Date(),
         };
 
-        (geocodingClient.hashQuery as jest.Mock).mockReturnValue(queryId);
+        (hashQuery as jest.Mock).mockReturnValue(queryId);
         (geocodingRepository.findById as jest.Mock).mockResolvedValue(
           geocodingFeature
         );
@@ -208,7 +210,7 @@ describe('GeocodingService', () => {
         const result = await geocodingService.fetchAndSaveGeocodingData(query);
 
         expect(result).toEqual(geocodingFeature);
-        expect(geocodingClient.hashQuery).toHaveBeenCalledWith(query);
+        expect(hashQuery).toHaveBeenCalledWith(query);
         expect(geocodingClient.geocode).not.toHaveBeenCalled();
         expect(geocodingRepository.findById).toHaveBeenCalledWith(queryId);
         expect(geocodingRepository.create).not.toHaveBeenCalled();
@@ -217,7 +219,7 @@ describe('GeocodingService', () => {
     it('should throw an error when an error occurs during fetching and saving geocoding data', async () => {
       const query = 'New York';
       const errorMessage = 'Failed to fetch geocoding data';
-      (geocodingClient.hashQuery as jest.Mock).mockReturnValue('hashedQueryId');
+      (hashQuery as jest.Mock).mockReturnValue('hashQueryId');
       (geocodingClient.geocode as jest.Mock).mockRejectedValue(
         new Error(errorMessage)
       );
