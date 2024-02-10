@@ -26,22 +26,26 @@ const apartmentRepository = createApartmentRepository();
 async function run() {
   await connectToDatabase(dbConfig);
   const apartments = await scrapeApartments(url);
-  const features = await getApartmentFeatures(apartments);
-  const pendingApartments = apartments.map((apartment) =>
+  const apartmentsWithFeatures = await getApartmentsWithFeature(apartments);
+  const pendingApartments = apartmentsWithFeatures.map((apartment) =>
     apartmentRepository.upsertApartment(apartment)
   );
   await Promise.all(pendingApartments);
 }
 
-async function getApartmentFeatures(apartments: Partial<Apartment>[]) {
+async function getApartmentsWithFeature(apartments: Partial<Apartment>[]) {
   let apartmentFeatures = [];
   for (const apartment of apartments) {
     const structuredQuery = mapApartmentToStructuredQuery(apartment);
     const feature = await geocodingService.fetchAndSaveGeocodingData(
       structuredQuery
     );
-    apartmentFeatures = [...apartmentFeatures, { apartment, feature }];
+    apartmentFeatures = [
+      ...apartmentFeatures,
+      { ...apartment, location: feature },
+    ];
   }
+  return apartmentFeatures;
 }
 
 run();
