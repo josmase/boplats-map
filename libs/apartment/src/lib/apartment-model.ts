@@ -29,4 +29,8 @@ apartmentSchema.pre<Apartment>('save', function (next) {
   next();
 });
 
-export const ApartmentModel = model<Apartment>('Apartment', apartmentSchema);
+interface ApartmentModel extends Apartment, Document {}
+export const ApartmentModel = model<ApartmentModel>(
+  'Apartment',
+  apartmentSchema
+);

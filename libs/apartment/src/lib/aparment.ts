@@ -1,7 +1,4 @@
-import { Document } from 'mongoose';
-import { Location } from '@boplats-map/location';
-
-export interface Apartment extends Document {
+export interface Apartment {
   link: string;
   imageUrls: string[];
   areaName: string;
@@ -13,7 +10,6 @@ export interface Apartment extends Document {
   publishedAt?: Date;
   updatedAt: Date;
   createdAt: Date;
-  location: Location;
 }
 
 export interface Price {
