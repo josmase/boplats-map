@@ -1,11 +1,36 @@
 import fetch from 'node-fetch';
-import { GeocodingClient } from './geocoding-client';
+import { GeocodingClient } from './geocoding.client';
+import { Test } from '@nestjs/testing';
+import { ConfigType } from '@nestjs/config';
+import nominatimConfiguration from '../config/nominatim.configuration';
 
 jest.mock('node-fetch');
 
+const userAgent = 'Test User Agent';
+const apiUrl = 'https://example.com/api';
+
+const mockConfig: ConfigType<typeof nominatimConfiguration> = {
+  userAgent,
+  apiUrl,
+  timeBetweenRequestsMs: 0,
+};
+
 describe('GeocodingClient', () => {
-  const userAgent = 'Test User Agent';
-  const apiUrl = 'https://example.com/api';
+  let client: GeocodingClient;
+
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      providers: [
+        GeocodingClient,
+        {
+          provide: nominatimConfiguration.KEY,
+          useValue: mockConfig,
+        },
+      ],
+    }).compile();
+
+    client = module.get<GeocodingClient>(GeocodingClient);
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -18,7 +43,6 @@ describe('GeocodingClient', () => {
           /* mock geocoding response */
         },
       ];
-      const client = new GeocodingClient(userAgent, apiUrl);
 
       (fetch as unknown as jest.Mock).mockResolvedValueOnce({
         ok: true,
@@ -45,7 +69,6 @@ describe('GeocodingClient', () => {
           /* mock geocoding response */
         },
       ];
-      const client = new GeocodingClient(userAgent, apiUrl);
 
       (fetch as unknown as jest.Mock).mockResolvedValueOnce({
         ok: true,
@@ -67,8 +90,6 @@ describe('GeocodingClient', () => {
     });
 
     it('should throw error if request fails', async () => {
-      const client = new GeocodingClient(userAgent, apiUrl);
-
       (fetch as unknown as jest.Mock).mockResolvedValueOnce({
         ok: false,
         status: 404,
@@ -81,8 +102,6 @@ describe('GeocodingClient', () => {
     });
 
     it('should throw error if fetch fails', async () => {
-      const client = new GeocodingClient(userAgent, apiUrl);
-
       (fetch as unknown as jest.Mock).mockRejectedValueOnce(
         new Error('Mocked fetch error')
       );

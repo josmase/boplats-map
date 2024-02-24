@@ -1,29 +1,31 @@
 import fetch from 'node-fetch';
 import { StructuredQuery } from './request';
 import { GeocodingResponse } from './response';
-import { createHash } from 'crypto';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { ConfigService, ConfigType } from '@nestjs/config';
+import nominatimConfiguration from '../config/nominatim.configuration';
 
 interface QueryParams extends StructuredQuery {
   q: string;
   format: 'geojson';
 }
-
+@Injectable()
 export class GeocodingClient {
   constructor(
-    private readonly userAgent: string,
-    private readonly apiUrl: string
+    @Inject(nominatimConfiguration.KEY)
+    private readonly config: ConfigType<typeof nominatimConfiguration>
   ) {}
 
   async geocode(query: string | Partial<StructuredQuery>) {
     const queryParams = this.createQueryParams(query);
 
-    const url = `${this.apiUrl}?${queryParams}`;
+    const url = `${this.config.apiUrl}?${queryParams}`;
 
     try {
-      console.debug('Attempting to geocode:', url);
+      Logger.debug('Attempting to geocode:', url);
       const response = await fetch(url, {
         headers: {
-          'User-Agent': this.userAgent,
+          'User-Agent': this.config.userAgent,
         },
       });
 

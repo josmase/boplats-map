@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio';
 import { parseApartments } from './parser/apartment-parser';
+import { Logger } from '@nestjs/common';
 
 async function search(url: URL | RequestInfo) {
   try {
@@ -7,7 +8,7 @@ async function search(url: URL | RequestInfo) {
     const html = await res.text();
     return cheerio.load(html);
   } catch (error) {
-    console.log(error);
+    Logger.log(error);
   }
 }
 

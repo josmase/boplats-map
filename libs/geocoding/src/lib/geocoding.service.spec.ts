@@ -1,28 +1,52 @@
-import { GeocodingClient } from './nominatim/geocoding-client';
-import { GeocodingResponse } from './nominatim/response';
-import { GeocodingRepository } from './repository/geocoding-repository';
-import { GeocodingService } from './geocoding-service';
+import { GeocodingClient } from './nominatim/geocoding.client';
+import {
+  GeocodingFeatureResponse,
+  GeocodingResponse,
+} from './nominatim/response';
+import { GeocodingRepository } from './repository/geocoding.repository';
+import { GeocodingService } from './geocoding.service';
 import { StructuredQuery } from './nominatim/request';
 import { hashQuery } from './key-hasher';
-import { GeocodingFeature } from './repository/geocoding-model';
+import { GeocodingFeature } from './repository/geocoding.schema';
+import { ConfigType } from '@nestjs/config';
+import nominatimConfiguration from './config/nominatim.configuration';
+import { Test } from '@nestjs/testing';
 
-jest.mock('./nominatim/geocoding-client');
-jest.mock('./repository/geocoding-repository');
+jest.mock('./nominatim/geocoding.client');
+jest.mock('./repository/geocoding.repository');
 jest.mock('./key-hasher');
 
+const mockConfig: ConfigType<typeof nominatimConfiguration> = {
+  userAgent: 'Test User Agent',
+  apiUrl: 'https://example.com/api',
+  timeBetweenRequestsMs: 0,
+};
+
 describe('GeocodingService', () => {
-  let geocodingClient: GeocodingClient;
-  let geocodingRepository: GeocodingRepository;
+  let geocodingClient: jest.Mocked<GeocodingClient>;
+  let geocodingRepository: jest.Mocked<GeocodingRepository>;
   let geocodingService: GeocodingService;
 
-  beforeEach(() => {
-    geocodingClient = new GeocodingClient('Mock user agent', 'Mock api url');
-    geocodingRepository = new GeocodingRepository(null);
-    geocodingService = new GeocodingService(
-      geocodingClient,
-      geocodingRepository,
-      1
-    );
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      providers: [
+        GeocodingClient,
+        GeocodingRepository,
+        GeocodingService,
+        {
+          provide: nominatimConfiguration.KEY,
+          useValue: mockConfig,
+        },
+      ],
+    }).compile();
+
+    geocodingClient = module.get(
+      GeocodingClient
+    ) as jest.Mocked<GeocodingClient>;
+    geocodingRepository = module.get(
+      GeocodingRepository
+    ) as jest.Mocked<GeocodingRepository>;
+    geocodingService = module.get(GeocodingService);
   });
 
   describe('fetchAndSaveGeocodingData', () => {
@@ -61,11 +85,9 @@ describe('GeocodingService', () => {
 
         // Mock the methods and return values
         (hashQuery as jest.Mock).mockReturnValue(queryId);
-        (geocodingClient.geocode as jest.Mock).mockResolvedValue(response);
-        (geocodingRepository.findById as jest.Mock).mockResolvedValue(null);
-        (geocodingRepository.create as jest.Mock).mockResolvedValue(
-          geocodingFeature
-        );
+        geocodingClient.geocode.mockResolvedValue(response);
+        geocodingRepository.findById.mockResolvedValue(null);
+        geocodingRepository.create.mockResolvedValue(geocodingFeature);
 
         // Call the method under test
         const result = await geocodingService.fetchAndSaveGeocodingData(query);
@@ -108,9 +130,7 @@ describe('GeocodingService', () => {
 
         // Mock the methods and return values
         (hashQuery as jest.Mock).mockReturnValue(queryId);
-        (geocodingRepository.findById as jest.Mock).mockResolvedValue(
-          existingMatch
-        );
+        geocodingRepository.findById.mockResolvedValue(existingMatch);
 
         // Call the method under test
         const result = await geocodingService.fetchAndSaveGeocodingData(query);
@@ -157,11 +177,9 @@ describe('GeocodingService', () => {
         };
 
         (hashQuery as jest.Mock).mockReturnValue(queryId);
-        (geocodingClient.geocode as jest.Mock).mockResolvedValue(response);
-        (geocodingRepository.findById as jest.Mock).mockResolvedValue(null);
-        (geocodingRepository.create as jest.Mock).mockResolvedValue(
-          geocodingFeature
-        );
+        geocodingClient.geocode.mockResolvedValue(response);
+        geocodingRepository.findById.mockResolvedValue(null);
+        geocodingRepository.create.mockResolvedValue(geocodingFeature);
 
         const result = await geocodingService.fetchAndSaveGeocodingData(query);
 
@@ -202,9 +220,7 @@ describe('GeocodingService', () => {
         };
 
         (hashQuery as jest.Mock).mockReturnValue(queryId);
-        (geocodingRepository.findById as jest.Mock).mockResolvedValue(
-          geocodingFeature
-        );
+        geocodingRepository.findById.mockResolvedValue(geocodingFeature);
 
         const result = await geocodingService.fetchAndSaveGeocodingData(query);
 
@@ -219,9 +235,7 @@ describe('GeocodingService', () => {
       const query = 'New York';
       const errorMessage = 'Failed to fetch geocoding data';
       (hashQuery as jest.Mock).mockReturnValue('hashQueryId');
-      (geocodingClient.geocode as jest.Mock).mockRejectedValue(
-        new Error(errorMessage)
-      );
+      geocodingClient.geocode.mockRejectedValue(new Error(errorMessage));
 
       await expect(
         geocodingService.fetchAndSaveGeocodingData(query)

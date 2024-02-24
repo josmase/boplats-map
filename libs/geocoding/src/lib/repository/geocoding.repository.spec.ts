@@ -1,18 +1,41 @@
-import { GeocodingFeature, GeocodingFeatureModel } from './geocoding-model';
-import { GeocodingRepository } from './geocoding-repository';
+import { GeocodingFeature } from './geocoding.schema';
+import { GeocodingRepository } from './geocoding.repository';
+import { Model } from 'mongoose';
+import { getModelToken } from '@nestjs/mongoose';
+import { Test } from '@nestjs/testing';
 
-jest.mock('./geocoding-model');
+const mockModel = () => ({
+  findOne: jest.fn(),
+  create: jest.fn(),
+});
 
 describe('GeocodingRepository', () => {
-  let geocodingRepository: GeocodingRepository;
+  let repository: GeocodingRepository;
+  let model: jest.Mocked<Model<GeocodingFeature>>;
 
-  beforeEach(() => {
-    geocodingRepository = new GeocodingRepository(GeocodingFeatureModel);
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      providers: [
+        GeocodingRepository,
+        {
+          provide: getModelToken(GeocodingFeature.name),
+          useFactory: mockModel,
+        },
+      ],
+    }).compile();
+
+    repository = module.get<GeocodingRepository>(GeocodingRepository);
+    model = module.get<Model<GeocodingFeature>>(
+      getModelToken(GeocodingFeature.name)
+    ) as jest.Mocked<Model<GeocodingFeature>>;
+  });
+
+  it('should be defined', () => {
+    expect(repository).toBeDefined();
   });
 
   describe('create', () => {
     it('should call model.create with correct parameters', async () => {
-      const queryId = 'testQueryId';
       const feature: GeocodingFeature = {
         queryId: 'queryId',
         type: 'Feature',
@@ -37,11 +60,11 @@ describe('GeocodingRepository', () => {
         updatedAt: new Date(),
       };
 
-      (GeocodingFeatureModel.create as jest.Mock).mockResolvedValue(feature);
+      model.create.mockResolvedValue(null);
 
-      await geocodingRepository.create(feature);
+      await repository.create(feature);
 
-      expect(GeocodingFeatureModel.create).toHaveBeenCalledWith(feature);
+      expect(model.create).toHaveBeenCalledWith(feature);
     });
 
     it('should return the created feature', async () => {
@@ -70,9 +93,9 @@ describe('GeocodingRepository', () => {
         updatedAt: new Date(),
       };
 
-      (GeocodingFeatureModel.create as jest.Mock).mockResolvedValue(feature);
+      model.create.mockResolvedValue(feature as any);
 
-      const result = await geocodingRepository.create(feature);
+      const result = await repository.create(feature);
 
       expect(result).toEqual(feature);
     });
@@ -82,11 +105,13 @@ describe('GeocodingRepository', () => {
     it('should call model.findOne with correct _id', async () => {
       const queryId = 'testId';
 
-      (GeocodingFeatureModel.findOne as jest.Mock).mockResolvedValue(null);
+      model.findOne.mockReturnValue({
+        exec: jest.fn().mockResolvedValueOnce(null),
+      } as any);
 
-      await geocodingRepository.findById(queryId);
+      await repository.findById(queryId);
 
-      expect(GeocodingFeatureModel.findOne).toHaveBeenCalledWith({ queryId });
+      expect(model.findOne).toHaveBeenCalledWith({ queryId });
     });
 
     it('should return the found feature', async () => {
@@ -115,9 +140,10 @@ describe('GeocodingRepository', () => {
         updatedAt: new Date(),
       };
 
-      (GeocodingFeatureModel.findOne as jest.Mock).mockResolvedValue(feature);
-
-      const result = await geocodingRepository.findById(queryId);
+      model.findOne.mockReturnValue({
+        exec: jest.fn().mockResolvedValueOnce(feature),
+      } as any);
+      const result = await repository.findById(queryId);
 
       expect(result).toEqual(feature);
     });

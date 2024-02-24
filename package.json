@@ -17,6 +17,7 @@
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",
+    "@nestjs/config": "^3.2.0",
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "axios": "^1.6.0",
@@ -26,8 +27,9 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@nestjs/mongoose": "^10.0.4",
     "@nestjs/schematics": "^10.0.1",
-    "@nestjs/testing": "^10.0.2",
+    "@nestjs/testing": "^10.3.3",
     "@nx/cypress": "18.0.0",
     "@nx/deno": "^17.2.3",
     "@nx/esbuild": "18.0.0",

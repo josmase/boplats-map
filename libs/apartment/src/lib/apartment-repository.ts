@@ -1,13 +1,18 @@
 import { FilterQuery, Model } from 'mongoose';
-import { Apartment } from './apartment';
-import { ApartmentModel } from './apartment-model';
+import { Apartment } from './apartment.schema';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
+@Injectable()
 export class ApartmentRepository {
-  constructor(private readonly model: Model<ApartmentModel>) {}
+  constructor(
+    @InjectModel(Apartment.name)
+    private readonly model: Model<Apartment>
+  ) {}
 
   async upsertApartment(
-    apartmentData: Partial<Apartment | ApartmentModel>
-  ): Promise<Apartment | ApartmentModel | null> {
+    apartmentData: Partial<Apartment>
+  ): Promise<Apartment | null> {
     try {
       const result = await this.model.findOneAndUpdate(
         { link: apartmentData.link },
@@ -21,9 +26,7 @@ export class ApartmentRepository {
     }
   }
 
-  async deleteApartment(
-    _id: string
-  ): Promise<Apartment | ApartmentModel | null> {
+  async deleteApartment(_id: string): Promise<Apartment | null> {
     try {
       const result = await this.model.findOneAndDelete({ _id });
       return result;
@@ -32,9 +35,7 @@ export class ApartmentRepository {
     }
   }
 
-  async searchApartments(
-    query: FilterQuery<Apartment>
-  ): Promise<Apartment[] | ApartmentModel[]> {
+  async searchApartments(query: FilterQuery<Apartment>): Promise<Apartment[]> {
     try {
       const results = await this.model.find(query);
       return results;
@@ -42,8 +43,4 @@ export class ApartmentRepository {
       throw new Error(`Error searching apartments: ${error.message}`);
     }
   }
-}
-
-export function createApartmentRepository() {
-  return new ApartmentRepository(ApartmentModel);
 }

@@ -17,7 +17,6 @@
     "paths": {
       "@boplats-map/apartment": ["libs/apartment/src/index.ts"],
       "@boplats-map/apartment-scraper": ["libs/apartment-scraper/src/index.ts"],
-      "@boplats-map/database-utils": ["libs/database-utils/src/index.ts"],
       "@boplats-map/geocoding": ["libs/geocoding/src/index.ts"]
     }
   },

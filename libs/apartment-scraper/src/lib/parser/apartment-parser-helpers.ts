@@ -1,5 +1,6 @@
 import { parseISO } from 'date-fns';
 import { Floor, Price, Size } from '@boplats-map/apartment';
+import { Logger } from '@nestjs/common';
 
 export function parsePrice(price: string): Price | null {
   const regex = /^(\d[\d\s]*)\s+(\w+)$/;
@@ -10,7 +11,7 @@ export function parsePrice(price: string): Price | null {
     const currency = match[2];
     return { amount, currency };
   }
-  console.warn('Unable to parse price:', price);
+  Logger.warn('Unable to parse price:', price);
   return null;
 }
 
@@ -24,7 +25,7 @@ export function parseSize(size: string): Size | null {
 
     return { amount, unit };
   }
-  console.warn('Unable to parse size:', size);
+  Logger.warn('Unable to parse size:', size);
   return null;
 }
 
@@ -51,7 +52,7 @@ function parseDateString(unparsedDate: string, today: Date) {
 
   const parsedDate = parseISO(unparsedDate);
   if (isNaN(parsedDate.getTime())) {
-    console.warn('Unable to parse date:', unparsedDate);
+    Logger.warn('Unable to parse date:', unparsedDate);
     return null;
   }
   return parsedDate;
@@ -76,7 +77,7 @@ export function parseFloor(floor: string): Floor | null {
     return { actual };
   }
 
-  console.warn('Unable to parse floor:', floor);
+  Logger.warn('Unable to parse floor:', floor);
   return null;
 }
 

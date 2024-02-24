@@ -1,20 +1,22 @@
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { hashQuery } from './key-hasher';
-import { GeocodingClient } from './nominatim/geocoding-client';
+import { GeocodingClient } from './nominatim/geocoding.client';
 import { StructuredQuery } from './nominatim/request';
 import { GeocodingFeatureResponse } from './nominatim/response';
-import {
-  GeocodingFeature,
-  GeocodingFeatureModel,
-} from './repository/geocoding-model';
-import { GeocodingRepository } from './repository/geocoding-repository';
+import { GeocodingFeature } from './repository/geocoding.schema';
+import { GeocodingRepository } from './repository/geocoding.repository';
+import nominatimConfiguration from './config/nominatim.configuration';
+import { ConfigType } from '@nestjs/config';
 
+@Injectable()
 export class GeocodingService {
   private lastQueryTimestamp: number = 0;
 
   constructor(
     private readonly geocodingClient: GeocodingClient,
     private readonly geocodingRepository: GeocodingRepository,
-    private readonly timeBetweenRequestsMs: number
+    @Inject(nominatimConfiguration.KEY)
+    private readonly config: ConfigType<typeof nominatimConfiguration>
   ) {}
 
   async fetchAndSaveGeocodingData(
@@ -22,10 +24,10 @@ export class GeocodingService {
   ): Promise<GeocodingFeature> {
     try {
       const queryId = hashQuery(query);
-      console.debug(`${queryId}: Attempting to geocode:`, query);
+      Logger.debug(`${queryId}: Attempting to geocode:`, query);
       const existingMatch = await this.geocodingRepository.findById(queryId);
       if (existingMatch) {
-        console.debug(`${queryId}: Cache hit`);
+        Logger.debug(`${queryId}: Cache hit`);
         return existingMatch;
       }
 
@@ -46,7 +48,7 @@ export class GeocodingService {
   private async makeRateLimitedRequest(
     query: string | Partial<StructuredQuery>
   ) {
-    await this.rateLinmit(this.timeBetweenRequestsMs);
+    await this.rateLinmit(this.config.timeBetweenRequestsMs);
     const response = await this.geocodingClient.geocode(query);
     this.lastQueryTimestamp = Date.now();
     return response;
@@ -55,12 +57,12 @@ export class GeocodingService {
   private async rateLinmit(rateLimit: number) {
     const currentTime = Date.now();
     const timeElapsedMs = currentTime - this.lastQueryTimestamp;
-    console.debug(
+    Logger.debug(
       `Checking if request needs to be throotled. Rate limit ${rateLimit}ms, time since last request ${timeElapsedMs}`
     );
     if (timeElapsedMs < rateLimit) {
       const delay = rateLimit - timeElapsedMs;
-      console.debug(`Too many requests, delaying for ${delay}ms`);
+      Logger.debug(`Too many requests, delaying for ${delay}ms`);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
@@ -74,30 +76,12 @@ export class GeocodingService {
     const bestMatch = sortedFeatures.length > 0 ? sortedFeatures[0] : null;
     const discardedFeatures = sortedFeatures.slice(1);
     if (discardedFeatures.length > 0) {
-      console.log('Best Match:');
-      console.dir(bestMatch);
+      Logger.log('Best Match:');
+      Logger.log(bestMatch);
 
-      console.log('Discarded Features:');
-      console.dir(discardedFeatures);
+      Logger.log('Discarded Features:');
+      Logger.log(discardedFeatures);
     }
     return bestMatch;
   }
-}
-
-interface GeoCodingConfig {
-  userAgent: string;
-  apiUrl: string;
-  timeBetweenRequestsMs: number;
-}
-
-export function createGeoCodingService({
-  userAgent,
-  apiUrl,
-  timeBetweenRequestsMs,
-}: GeoCodingConfig) {
-  return new GeocodingService(
-    new GeocodingClient(userAgent, apiUrl),
-    new GeocodingRepository(GeocodingFeatureModel),
-    timeBetweenRequestsMs
-  );
 }
