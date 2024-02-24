@@ -1,3 +1,4 @@
+import { GeocodingFeature } from '@boplats-map/geocoding';
 export interface Apartment {
   link: string;
   imageUrls: string[];
@@ -10,6 +11,7 @@ export interface Apartment {
   publishedAt?: Date;
   updatedAt: Date;
   createdAt: Date;
+  location: GeocodingFeature;
 }
 
 export interface Price {
