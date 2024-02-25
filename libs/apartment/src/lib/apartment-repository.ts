@@ -1,6 +1,6 @@
 import { FilterQuery, Model } from 'mongoose';
 import { Apartment } from './apartment.schema';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
@@ -37,6 +37,7 @@ export class ApartmentRepository {
 
   async searchApartments(query: FilterQuery<Apartment>): Promise<Apartment[]> {
     try {
+      Logger.log(`Running query: ${JSON.stringify(query)}`);
       const results = await this.model.find(query);
       return results;
     } catch (error) {

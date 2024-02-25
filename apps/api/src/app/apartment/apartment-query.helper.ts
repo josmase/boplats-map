@@ -10,21 +10,21 @@ interface DateQuery {
 }
 
 interface RoomsQuery {
-  rooms?: {
+  roomCount?: {
     $gte?: number;
     $lte?: number;
   };
 }
 
-interface RentQuery {
-  rent?: {
+interface PriceQuery {
+  'price.amount'?: {
     $gte?: number;
     $lte?: number;
   };
 }
 
 interface SizeQuery {
-  size?: {
+  'size.amount'?: {
     $gte?: number;
     $lte?: number;
   };
@@ -36,7 +36,7 @@ export function createQueryFromRequest(
   return {
     ...buildDateQuery(request),
     ...buildRoomsQuery(request),
-    ...buildRentQuery(request),
+    ...buildPriceQuery(request),
     ...buildSizeQuery(request),
   };
 }
@@ -63,25 +63,25 @@ function buildRoomsQuery(request?: GetApartmentRequest): RoomsQuery {
 
   const query: RoomsQuery = {};
   if (request.roomsMin) {
-    query.rooms = { $gte: request.roomsMin };
+    query.roomCount = { $gte: request.roomsMin };
   }
   if (request.roomsMax) {
-    query.rooms = { ...query.rooms, $lte: request.roomsMax };
+    query.roomCount = { ...query.roomCount, $lte: request.roomsMax };
   }
   return query;
 }
 
-function buildRentQuery(request?: GetApartmentRequest): RentQuery {
+function buildPriceQuery(request?: GetApartmentRequest): PriceQuery {
   if (!request) {
     return {};
   }
 
-  const query: RentQuery = {};
+  let query: PriceQuery = {};
   if (request.rentMin) {
-    query.rent = { $gte: request.rentMin };
+    query['price.amount'] = { $gte: request.rentMin };
   }
   if (request.rentMax) {
-    query.rent = { ...query.rent, $lte: request.rentMax };
+    query['price.amount'] = { ...query['price.amount'], $lte: request.rentMax };
   }
   return query;
 }
@@ -91,12 +91,13 @@ function buildSizeQuery(request?: GetApartmentRequest): SizeQuery {
     return {};
   }
 
-  const query: SizeQuery = {};
+  let query: SizeQuery = {};
   if (request.sizeMin) {
-    query.size = { $gte: request.sizeMin };
+    query['size.amount'] = { $gte: request.sizeMin };
   }
   if (request.sizeMax) {
-    query.size = { ...query.size, $lte: request.sizeMax };
+    query['size.amount'] = { ...query['size.amount'], $lte: request.sizeMax };
   }
+
   return query;
 }

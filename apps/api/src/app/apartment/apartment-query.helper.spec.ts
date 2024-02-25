@@ -22,9 +22,9 @@ describe('createQueryFromRequest', () => {
     it.each`
       query                           | expectedQuery
       ${null}                         | ${{}}
-      ${{ roomsMin: 1 }}              | ${{ rooms: { $gte: 1 } }}
-      ${{ roomsMax: 3 }}              | ${{ rooms: { $lte: 3 } }}
-      ${{ roomsMin: 1, roomsMax: 3 }} | ${{ rooms: { $gte: 1, $lte: 3 } }}
+      ${{ roomsMin: 1 }}              | ${{ roomCount: { $gte: 1 } }}
+      ${{ roomsMax: 3 }}              | ${{ roomCount: { $lte: 3 } }}
+      ${{ roomsMin: 1, roomsMax: 3 }} | ${{ roomCount: { $gte: 1, $lte: 3 } }}
     `(
       'should create query with correct argument when rooms is $rooms',
       ({ query, expectedQuery }) => {
@@ -38,9 +38,9 @@ describe('createQueryFromRequest', () => {
     it.each`
       query                               | expectedQuery
       ${null}                             | ${{}}
-      ${{ rentMin: 1000 }}                | ${{ rent: { $gte: 1000 } }}
-      ${{ rentMax: 2000 }}                | ${{ rent: { $lte: 2000 } }}
-      ${{ rentMin: 1000, rentMax: 2000 }} | ${{ rent: { $gte: 1000, $lte: 2000 } }}
+      ${{ rentMin: 1000 }}                | ${{ 'price.amount': { $gte: 1000 } }}
+      ${{ rentMax: 2000 }}                | ${{ 'price.amount': { $lte: 2000 } }}
+      ${{ rentMin: 1000, rentMax: 2000 }} | ${{ 'price.amount': { $gte: 1000, $lte: 2000 } }}
     `(
       'should create query with correct argument when rent is $rent',
       ({ query, expectedQuery }) => {
@@ -54,9 +54,9 @@ describe('createQueryFromRequest', () => {
     it.each`
       query                            | expectedQuery
       ${null}                          | ${{}}
-      ${{ sizeMin: 50 }}               | ${{ size: { $gte: 50 } }}
-      ${{ sizeMax: 100 }}              | ${{ size: { $lte: 100 } }}
-      ${{ sizeMin: 50, sizeMax: 100 }} | ${{ size: { $gte: 50, $lte: 100 } }}
+      ${{ sizeMin: 50 }}               | ${{ 'size.amount': { $gte: 50 } }}
+      ${{ sizeMax: 100 }}              | ${{ 'size.amount': { $lte: 100 } }}
+      ${{ sizeMin: 50, sizeMax: 100 }} | ${{ 'size.amount': { $gte: 50, $lte: 100 } }}
     `(
       'should create query with correct argument when size is $size',
       ({ query, expectedQuery }) => {
