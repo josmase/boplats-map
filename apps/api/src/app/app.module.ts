@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ApartmentController } from './apartment/apartment.controller';
+import { ApartmentService } from './apartment/apartment.service';
+import { ApartmentModule } from '@boplats-map/apartment';
+import { MongooseModule } from '@boplats-map/mongoose';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [MongooseModule, ApartmentModule],
+  controllers: [ApartmentController],
+  providers: [ApartmentService],
 })
 export class AppModule {}
