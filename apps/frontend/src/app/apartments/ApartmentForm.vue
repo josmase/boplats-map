@@ -37,8 +37,8 @@
 </template>
 
 <script setup lang="ts">
-import type { GetApartmentRequest } from '@boplats-map/api-schema';
 import { ref } from 'vue';
+import type { GetApartmentRequest } from './api/requests';
 
 const formData = ref<GetApartmentRequest>({
   dateStart: undefined,

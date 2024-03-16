@@ -2,30 +2,37 @@
 import { onMounted } from 'vue';
 import useApartmentApi from './api/useApartmentApi';
 import ApartmentForm from './ApartmentForm.vue';
-import type { GetApartmentRequest } from '@boplats-map/api-schema';
+import ApartmentMap from './ApartmentMap.vue';
+import type { GetApartmentRequest } from './api/requests';
+import type { ApartmentDto } from './api/responses';
 
 const { responseData, error, fetchData } = useApartmentApi();
 onMounted(() => fetchData({}));
 
-const handleFormSubmit = (formData: GetApartmentRequest) => {
+function handleFormSubmit(formData: GetApartmentRequest) {
   fetchData(formData);
-};
+}
+
+function placeableApartments(apartments: ApartmentDto[]) {
+  return apartments.filter(
+    (apartment) => apartment.location?.geometry?.coordinates?.length > 0
+  );
+}
 </script>
 
 <style scoped>
-.wrapper {
+.map {
+  height: 500px;
   width: 100%;
-  height: 100%;
-  background-color: black;
 }
 </style>
 
 <template>
-  <div class="wrapper">
+  <div>
     <ApartmentForm @submit="handleFormSubmit" />
 
-    <div v-if="responseData">
-      <p>{{ responseData }}</p>
+    <div v-if="responseData" class="map">
+      <ApartmentMap :apartments="placeableApartments(responseData)" />
     </div>
     <div v-if="error">
       <p>Error: {{ error }}</p>

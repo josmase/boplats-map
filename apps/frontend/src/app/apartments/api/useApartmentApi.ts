@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import axios, { AxiosError } from 'axios';
-import { ApartmentDto, GetApartmentRequest } from '@boplats-map/api-schema';
+import type { ApartmentDto } from './responses';
+import type { GetApartmentRequest } from './requests';
 
 const BASE_URL = 'http://localhost:3000';
 
@@ -11,7 +12,7 @@ export default function useApartmentApi() {
   const fetchData = async (request: GetApartmentRequest) => {
     try {
       const response = await axios.get<ApartmentDto[]>(
-        BASE_URL + '/apartment',
+        BASE_URL + '/apartments',
         { params: request }
       );
       responseData.value = response.data;
