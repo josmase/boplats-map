@@ -24,12 +24,13 @@ export class GeocodingService {
   ): Promise<GeocodingFeature> {
     try {
       const queryId = hashQuery(query);
-      Logger.debug(`${queryId}: Attempting to geocode:`, query);
       const existingMatch = await this.geocodingRepository.findById(queryId);
       if (existingMatch) {
         Logger.debug(`${queryId}: Cache hit`);
         return existingMatch;
       }
+
+      Logger.debug(`${queryId}: Attempting to geocode:`, query);
 
       const response = await this.makeRateLimitedRequest(query);
 
