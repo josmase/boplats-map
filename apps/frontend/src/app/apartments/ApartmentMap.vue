@@ -25,9 +25,9 @@ import type { ApartmentDto } from './api/responses';
 import type { LatLngExpression, PointExpression } from 'leaflet';
 import Apartment from './Apartment.vue';
 
-const gothenburg: PointExpression = [57.7089, 11.9746];
+const gothenburg: PointExpression = [57.6601183, 11.988888];
 
-const zoom = ref(6);
+const zoom = ref(10);
 const center = ref(gothenburg);
 
 defineProps<{ apartments: ApartmentDto[] }>();

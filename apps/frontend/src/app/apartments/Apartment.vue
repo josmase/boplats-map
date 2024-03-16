@@ -1,6 +1,5 @@
 <template>
   <div class="apartment-card">
-    <!-- Apartment Image -->
     <div class="image-container">
       <img
         v-if="apartment.imageUrls.length > 0"
@@ -10,21 +9,30 @@
       <div v-else class="no-image-placeholder">No Image Available</div>
     </div>
 
-    <!-- Apartment Details -->
     <div class="details-container">
-      <h2>{{ apartment.areaName }}</h2>
-      <p>{{ apartment.address }}</p>
-      <p v-if="apartment.roomCount">Rooms: {{ apartment.roomCount }}</p>
+      <h2>{{ apartment.areaName }} - {{ apartment.address }}</h2>
+      <p v-if="apartment.roomCount">
+        <span class="label">Rooms:</span> {{ apartment.roomCount }}
+      </p>
       <p v-if="apartment.publishedAt">
-        Published At:
+        <span class="label">Published At:</span>
         {{ formatDate(apartment.publishedAt) }}
       </p>
       <p v-if="apartment.price">
-        Price: {{ apartment.price.amount }} {{ apartment.price.currency }}
+        <span class="label">Price:</span> {{ apartment.price.amount }}
+        {{ apartment.price.currency }}
       </p>
-      <p>Size: {{ apartment.size.amount }} {{ apartment.size.unit }}</p>
+      <p>
+        <span class="label">Size:</span> {{ apartment.size.amount }}
+        {{ apartment.size.unit }}
+      </p>
       <p v-if="apartment.floor">
-        Floor: {{ apartment.floor.actual }}/{{ apartment.floor.total || 'N/A' }}
+        <span class="label">Floor:</span> {{ apartment.floor.actual }}/{{
+          apartment.floor.total || 'N/A'
+        }}
+      </p>
+      <p>
+        <a :href="apartment.link" target="_blank">View at boplats</a>
       </p>
     </div>
   </div>
@@ -51,15 +59,13 @@ const formatDate = (date: Date) => {
 .apartment-card {
   display: flex;
   flex-flow: column;
-  border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 20px;
 }
 
 .image-container {
-  width: 100¤;
-  height: 150px;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -78,11 +84,21 @@ const formatDate = (date: Date) => {
 }
 
 .details-container {
-  padding: 20px;
+  padding: 20px 10px;
 }
 
 .details-container h2 {
   margin-top: 0;
   margin-bottom: 10px;
+  font-weight: bold;
+  font-size: initial;
+}
+
+.details-container p {
+  margin: initial;
+}
+
+.details-container .label {
+  font-weight: bold;
 }
 </style>

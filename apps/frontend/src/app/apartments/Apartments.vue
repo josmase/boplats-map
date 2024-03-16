@@ -7,7 +7,6 @@ import type { GetApartmentRequest } from './api/requests';
 import type { ApartmentDto } from './api/responses';
 
 const { responseData, error, fetchData } = useApartmentApi();
-onMounted(() => fetchData({}));
 
 function handleFormSubmit(formData: GetApartmentRequest) {
   fetchData(formData);
@@ -21,16 +20,23 @@ function placeableApartments(apartments: ApartmentDto[]) {
 </script>
 
 <style scoped>
-.map {
+.container {
   height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+
+.map {
+  flex-grow: 1;
   width: 100%;
 }
 </style>
 
 <template>
-  <div>
-    <ApartmentForm @submit="handleFormSubmit" />
-
+  <div class="container">
+    <div class="filter">
+      <ApartmentForm @submit="handleFormSubmit" />
+    </div>
     <div v-if="responseData" class="map">
       <ApartmentMap :apartments="placeableApartments(responseData)" />
     </div>

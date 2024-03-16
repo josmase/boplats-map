@@ -1,47 +1,102 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div>
-      <label for="dateStart">Date Start:</label>
-      <input type="date" id="dateStart" v-model="formData.dateStart" />
+  <form
+    @submit.prevent="submitForm"
+    @change="submitForm"
+    class="apartment-form"
+  >
+    <div class="form-group">
+      <h3>Rooms</h3>
+      <div class="select-container">
+        <select id="roomsMin" v-model="formData.roomsMin">
+          <option :value="undefined">Min</option>
+          <option
+            v-for="option in roomOptions"
+            :value="option.value"
+            :key="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+
+        <select id="roomsMax" v-model="formData.roomsMax">
+          <option :value="undefined">Max</option>
+          <option
+            v-for="option in roomOptions"
+            :value="option.value"
+            :key="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div>
-      <label for="dateEnd">Date End:</label>
-      <input type="date" id="dateEnd" v-model="formData.dateEnd" />
+    <div class="form-group">
+      <h3>Rent</h3>
+      <div class="select-container">
+        <select id="rentMin" v-model="formData.rentMin">
+          <option :value="undefined">Min</option>
+          <option
+            v-for="option in rentOptions"
+            :value="option.value"
+            :key="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+
+        <select id="rentMax" v-model="formData.rentMax">
+          <option :value="undefined">Max</option>
+          <option
+            v-for="option in rentOptions"
+            :value="option.value"
+            :key="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div>
-      <label for="roomsMin">Minimum Rooms:</label>
-      <input type="number" id="roomsMin" v-model.number="formData.roomsMin" />
+    <div class="form-group">
+      <h3>Size</h3>
+      <div class="select-container">
+        <select id="sizeMin" v-model="formData.sizeMin">
+          <option :value="undefined">Min</option>
+          <option
+            v-for="option in sizeOptions"
+            :value="option.value"
+            :key="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+
+        <select id="sizeMax" v-model="formData.sizeMax">
+          <option :value="undefined">Max</option>
+          <option
+            v-for="option in sizeOptions"
+            :value="option.value"
+            :key="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
     </div>
-    <div>
-      <label for="roomsMax">Maximum Rooms:</label>
-      <input type="number" id="roomsMax" v-model.number="formData.roomsMax" />
-    </div>
-    <div>
-      <label for="rentMin">Minimum Rent:</label>
-      <input type="number" id="rentMin" v-model.number="formData.rentMin" />
-    </div>
-    <div>
-      <label for="rentMax">Maximum Rent:</label>
-      <input type="number" id="rentMax" v-model.number="formData.rentMax" />
-    </div>
-    <div>
-      <label for="sizeMin">Minimum Size:</label>
-      <input type="number" id="sizeMin" v-model.number="formData.sizeMin" />
-    </div>
-    <div>
-      <label for="sizeMax">Maximum Size:</label>
-      <input type="number" id="sizeMax" v-model.number="formData.sizeMax" />
-    </div>
-    <button type="submit">Submit</button>
   </form>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, defineEmits, watch } from 'vue';
 import type { GetApartmentRequest } from './api/requests';
 
+const roomOptions = generateOptions(1, 6, 1);
+const rentOptions = generateOptions(2000, 20000, 1000);
+const sizeOptions = generateOptions(20, 100, 10);
+
+var daysAgo = new Date(); // today!
+daysAgo.setDate(daysAgo.getDate() - 5);
 const formData = ref<GetApartmentRequest>({
-  dateStart: undefined,
+  dateStart: daysAgo,
   dateEnd: undefined,
   roomsMin: undefined,
   roomsMax: undefined,
@@ -51,13 +106,56 @@ const formData = ref<GetApartmentRequest>({
   sizeMax: undefined,
 });
 
-const submitForm = () => {
-  emit('submit', formData.value);
-};
-
 const emit = defineEmits<{
   (e: 'submit', data: GetApartmentRequest): void;
 }>();
+
+watch(formData, () => {
+  submitForm();
+});
+
+submitForm();
+
+function submitForm() {
+  emit('submit', formData.value);
+}
+
+function generateOptions(min: number, max: number, step: number) {
+  const options = [];
+  for (let i = min; i <= max; i += step) {
+    options.push({ value: i, label: `${i}` });
+  }
+  return options;
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+.apartment-form {
+  display: flex;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin: 10px 10px 20px 10px;
+  flex: 1 1 200px;
+}
+
+h3 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.select-container {
+  display: flex;
+}
+
+select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+select:first-child {
+  margin-right: 5px;
+}
+</style>
