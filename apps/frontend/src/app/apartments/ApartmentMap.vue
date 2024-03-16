@@ -11,19 +11,19 @@
       name="© OpenStreetMap contributors"
       attribution="© OpenStreetMap contributors"
     ></l-tile-layer>
-    <l-marker
-      v-for="apartment in apartments"
-      :lat-lng="toLatLng(apartment)"
-    ></l-marker>
+    <l-marker v-for="apartment in apartments" :lat-lng="toLatLng(apartment)">
+      <l-popup><Apartment :apartment></Apartment></l-popup>
+    </l-marker>
   </l-map>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
-import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet';
+import { ref } from 'vue';
+import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { ApartmentDto } from './api/responses';
 import type { LatLngExpression, PointExpression } from 'leaflet';
+import Apartment from './Apartment.vue';
 
 const gothenburg: PointExpression = [57.7089, 11.9746];
 
@@ -43,6 +43,6 @@ function toLatLng(apartment: ApartmentDto): LatLngExpression {
 
 <style scoped>
 .map-container {
-  height: 400px;
+  height: 100%;
 }
 </style>
