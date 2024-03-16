@@ -1,4 +1,4 @@
-import { GetApartmentRequest } from '../requests/get-apartment.request';
+import { GetApartmentRequest } from '@boplats-map/api-schema';
 import { jest } from '@jest/globals';
 
 export class ApartmentServiceMock {

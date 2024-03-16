@@ -1,6 +1,6 @@
 import { Apartment } from '@boplats-map/apartment';
 import { FilterQuery } from 'mongoose';
-import { GetApartmentRequest } from './requests/get-apartment.request';
+import { GetApartmentRequest } from '@boplats-map/api-schema';
 
 interface DateQuery {
   updatedAt?: {
