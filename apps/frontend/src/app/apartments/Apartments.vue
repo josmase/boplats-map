@@ -2,7 +2,7 @@
 import { onMounted } from 'vue';
 import useApartmentApi from './api/useApartmentApi';
 import ApartmentForm from './ApartmentForm.vue';
-import { GetApartmentRequest } from '@boplats-map/api-schema';
+import type { GetApartmentRequest } from '@boplats-map/api-schema';
 
 const { responseData, error, fetchData } = useApartmentApi();
 onMounted(() => fetchData({}));
