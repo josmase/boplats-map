@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ApartmentRepository } from '@boplats-map/apartment';
 import { createQueryFromRequest } from './apartment-query.helper';
-import { ApartmentDto, GetApartmentRequest } from '@boplats-map/api-schema';
+import { GetApartmentRequest } from './requests/get-apartment.request';
+import { ApartmentDto } from './responses/apartment-dto';
 
 @Injectable()
 export class ApartmentService {

@@ -2,86 +2,86 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class PropertiesDto {
   @ApiProperty()
-  place_id!: number;
+  place_id: number;
 
   @ApiProperty()
-  osm_type!: string;
+  osm_type: string;
 
   @ApiProperty()
-  osm_id!: number;
+  osm_id: number;
 
   @ApiProperty()
-  place_rank!: number;
+  place_rank: number;
 
   @ApiProperty()
-  category!: string;
+  category: string;
 
   @ApiProperty()
-  type!: string;
+  type: string;
 
   @ApiProperty()
-  importance!: number;
+  importance: number;
 
   @ApiProperty()
-  addresstype!: string;
+  addresstype: string;
 
   @ApiProperty()
-  name!: string;
+  name: string;
 
   @ApiProperty()
-  display_name!: string;
+  display_name: string;
 }
 
 export class GeometryDto {
   @ApiProperty()
-  type!: string;
+  type: string;
 
   @ApiProperty()
-  coordinates!: [number, number];
+  coordinates: [number, number];
 }
 
 export class GeocodingFeatureDto {
   @ApiProperty()
-  queryId!: string;
+  queryId: string;
 
   @ApiProperty()
-  type!: string;
+  type: string;
 
   @ApiProperty({ type: PropertiesDto })
-  properties!: PropertiesDto;
+  properties: PropertiesDto;
 
   @ApiProperty()
-  bbox!: [number, number, number, number];
+  bbox: [number, number, number, number];
 
   @ApiProperty({ type: GeometryDto })
-  geometry!: GeometryDto;
+  geometry: GeometryDto;
 
   @ApiProperty()
-  createdAt!: Date;
+  createdAt: Date;
 
   @ApiProperty()
-  updatedAt!: Date;
+  updatedAt: Date;
 }
 
 export class PriceDto {
   @ApiProperty()
-  amount!: number;
+  amount: number;
 
   @ApiProperty()
-  currency!: string;
+  currency: string;
 }
 
 export class SizeDto {
   @ApiProperty()
-  amount!: number;
+  amount: number;
 
   @ApiProperty()
-  unit!: string;
+  unit: string;
 }
 
 export class FloorDto {
   @ApiProperty()
-  actual!: number;
+  actual: number;
 
   @ApiProperty({ required: false })
   total?: number;
@@ -89,25 +89,25 @@ export class FloorDto {
 
 export class ApartmentDto {
   @ApiProperty()
-  link!: string;
+  link: string;
 
   @ApiProperty({ type: [String] })
-  imageUrls!: string[];
+  imageUrls: string[];
 
   @ApiProperty()
-  areaName!: string;
+  areaName: string;
 
   @ApiProperty({ type: PriceDto })
-  price!: PriceDto;
+  price: PriceDto;
 
   @ApiProperty()
-  address!: string;
+  address: string;
 
   @ApiProperty({ type: SizeDto })
-  size!: SizeDto;
+  size: SizeDto;
 
   @ApiProperty({ type: FloorDto })
-  floor!: FloorDto;
+  floor: FloorDto;
 
   @ApiProperty({ required: false })
   roomCount?: number;
@@ -116,5 +116,5 @@ export class ApartmentDto {
   publishedAt?: Date;
 
   @ApiProperty({ type: GeocodingFeatureDto })
-  location!: GeocodingFeatureDto;
+  location: GeocodingFeatureDto;
 }

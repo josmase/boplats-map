@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ApartmentController } from './apartment.controller';
 import { ApartmentService } from './apartment.service';
-import { GetApartmentRequest } from '@boplats-map/api-schema';
+import { GetApartmentRequest } from './requests/get-apartment.request';
 import { Apartment } from '@boplats-map/apartment';
 import { ApartmentServiceMock } from './__mocks__/apartment.service.mock';
 

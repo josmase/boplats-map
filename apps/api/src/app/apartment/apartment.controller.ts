@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApartmentService } from './apartment.service';
-import { GetApartmentRequest, ApartmentDto } from '@boplats-map/api-schema';
+import { GetApartmentRequest } from './requests/get-apartment.request';
+import { ApartmentDto } from './responses/apartment-dto';
 import { ApiResponse } from '@nestjs/swagger';
 @Controller('apartments')
 export class ApartmentController {
