@@ -36,7 +36,7 @@ function parseApartment(
     .text()
     .trim();
   const floorInfo = $(resultItem).find('.search-result-floors').text().trim();
-  const roomCount = $(resultItem).find('.pure-u-1-2.right-align').text().trim();
+  const roomCount = $(resultItem).find('.pure-u-1-4.right-align').text().trim();
   const publDate = $(resultItem).find('.publ-date').text().trim();
 
   return {
