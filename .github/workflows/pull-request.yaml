@@ -1,0 +1,27 @@
+name: Pull Request Validation
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  validate:
+    strategy:
+      matrix:
+        dockerfile-path:
+          [
+            ./apps/frontend/Dockerfile,
+            ./apps/scraper/Dockerfile,
+            ./apps/api/Dockerfile,
+          ]
+
+    uses: josmase/workflows/.github/workflows/docker-build.yaml@main
+    with:
+      runner: new-new-boplats
+      registry_url: ${{ vars.REGISTRY_URL }}
+      dockerfile: ${{ matrix.dockerfile-path }}
+      context: .
+    secrets:
+      registry_username: ${{ secrets.REGISTRY_USERNAME }}
+      registry_password: ${{ secrets.REGISTRY_PASSWORD }}

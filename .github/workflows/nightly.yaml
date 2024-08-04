@@ -1,0 +1,14 @@
+name: Nightly Patch Version Bump
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs once a day at midnight UTC
+  workflow_dispatch: # manual trigger
+
+jobs:
+  check-changes-and-tag:
+    uses: josmase/workflows/.github/workflows/check-changes-and-tag.yaml@main
+    with:
+      runner: new-new-boplats
+    secrets:
+      token: ${{ secrets.AUTO_DEPLOY_PAT }}
