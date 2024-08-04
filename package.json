@@ -4,8 +4,11 @@
   "license": "MIT",
   "scripts": {
     "start:api": "nx serve api",
+    "build:api": "nx build api production",
     "start:frontend": "nx serve frontend",
+    "build:frontend": "nx build frontend production",
     "start:scraper": "nx serve scraper",
+    "build:scraper": "nx build scraper production",
     "test:api": "nx test api",
     "test:frontend": "nx test frontend",
     "test:scraper": "nx test scraper",
