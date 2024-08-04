@@ -3,3 +3,4 @@ dist
 .github
 .git
 **/Dockerfile
+docker-compose.yaml

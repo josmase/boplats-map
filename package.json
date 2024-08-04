@@ -6,7 +6,7 @@
     "start:api": "nx serve api",
     "build:api": "nx build api production",
     "start:frontend": "nx serve frontend",
-    "build:frontend": "nx build frontend production",
+    "build:frontend": "nx build frontend",
     "start:scraper": "nx serve scraper",
     "build:scraper": "nx build scraper production",
     "test:api": "nx test api",

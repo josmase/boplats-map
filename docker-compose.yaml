@@ -25,6 +25,15 @@ services:
       - DB_PASSWORD=example
     depends_on:
       - mongo
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile
+    environment:
+      - API_URL=http://localhost:3000
+    ports:
+      - 8082:80
 
   mongo:
     container_name: mongo
