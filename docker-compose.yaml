@@ -14,6 +14,17 @@ services:
       - 3000:3000
     depends_on:
       - mongo
+  scraper:
+    container_name: scraper
+    build:
+      context: .
+      dockerfile: apps/scraper/Dockerfile
+    environment:
+      - DB_URI=mongodb://mongo:27017/boplats?authSource=admin
+      - DB_USERNAME=root
+      - DB_PASSWORD=example
+    depends_on:
+      - mongo
 
   mongo:
     container_name: mongo
