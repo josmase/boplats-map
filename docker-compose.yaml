@@ -7,9 +7,7 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     environment:
-      - DB_URI=mongodb://mongo:27017/boplats?authSource=admin
-      - DB_USERNAME=root
-      - DB_PASSWORD=example
+      - DB_URI=mongodb://root:example@mongo:27017/boplats?authSource=admin
     ports:
       - 3000:3000
     depends_on:
@@ -20,9 +18,7 @@ services:
       context: .
       dockerfile: apps/scraper/Dockerfile
     environment:
-      - DB_URI=mongodb://mongo:27017/boplats?authSource=admin
-      - DB_USERNAME=root
-      - DB_PASSWORD=example
+      - DB_URI=mongodb://root:example@mongo:27017/boplats?authSource=admin
     depends_on:
       - mongo
   frontend:

@@ -14,21 +14,9 @@ import databaseConfiguration from './config/database.configuration';
       useFactory: async (config: ConfigType<typeof databaseConfiguration>) => {
         const mongooseConfig = {
           uri: config.uri,
-          pass: config.password,
-          user: config.username,
           autoIndex: true,
           autoCreate: true,
         };
-        const censoredConfig = {
-          ...mongooseConfig,
-          pass: '************',
-        };
-        Logger.log(
-          `Database configuration loaded successfully: ${JSON.stringify(
-            censoredConfig
-          )}`,
-          'DatabaseModule'
-        );
         return mongooseConfig;
       },
       inject: [databaseConfiguration.KEY],
