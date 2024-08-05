@@ -25,3 +25,5 @@ jobs:
     secrets:
       registry_username: ${{ secrets.REGISTRY_USERNAME }}
       registry_password: ${{ secrets.REGISTRY_PASSWORD }}
+    permissions:
+      contents: read
