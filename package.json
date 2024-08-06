@@ -39,7 +39,7 @@
     "@nestjs/testing": "^10.3.3",
     "@nx/cypress": "18.0.0",
     "@nx/deno": "^17.2.3",
-    "@nx/esbuild": "18.0.0",
+    "@nx/esbuild": "18.3.5",
     "@nx/eslint": "18.0.0",
     "@nx/eslint-plugin": "18.3.5",
     "@nx/jest": "18.3.5",
