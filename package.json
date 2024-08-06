@@ -37,7 +37,7 @@
     "@nestjs/mongoose": "^10.0.4",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.3.3",
-    "@nx/cypress": "18.0.0",
+    "@nx/cypress": "18.3.5",
     "@nx/deno": "^17.2.3",
     "@nx/esbuild": "18.0.0",
     "@nx/eslint": "18.0.0",
