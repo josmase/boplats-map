@@ -26,7 +26,7 @@ jobs:
     with:
       runner: new-new-boplats
       registry_url: ${{ vars.REGISTRY_URL }}
-      image_name: ${{ matrix.service }}
+      image_name: josmase/${{ matrix.service }}
       dockerfile: ${{ matrix.dockerfile-path }}
       context: .
     secrets:
