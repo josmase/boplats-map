@@ -41,3 +41,11 @@
 * cc9a219 Init commit
 * 81cbb68 Initial commit
 
+## v0.0.2
+
+* cd6d345 Update dependency @types/leaflet to v1.9.12
+* 696da9f Update dependency eslint-plugin-cypress to v2.15.2
+* 6aa493b Update dependency @vue/test-utils to v2.4.6
+* 6ad9072 Merge pull request #1 from josmase/renovate/configure
+* 46a6309 Add renovate.json
+
