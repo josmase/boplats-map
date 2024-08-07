@@ -9,25 +9,25 @@ jobs:
   release-docker-image:
     strategy:
       matrix:
-        service:
+        project:
           [
-            new-new-boplats-frontend,
-            new-new-boplats-scraper,
-            new-new-boplats-api,
-          ]
-        dockerfile-path:
-          [
-            ./apps/frontend/Dockerfile,
-            ./apps/scraper/Dockerfile,
-            ./apps/api/Dockerfile,
+            {
+              service: new-new-boplats-frontend,
+              dockerfile: ./apps/frontend/Dockerfile,
+            },
+            {
+              service: new-new-boplats-scraper,
+              dockerfile: ./apps/scraper/Dockerfile,
+            },
+            { service: new-new-boplats-api, dockerfile: ./apps/api/Dockerfile },
           ]
 
     uses: josmase/workflows/.github/workflows/docker-build-and-push.yaml@main
     with:
       runner: new-new-boplats
       registry_url: ${{ vars.REGISTRY_URL }}
-      image_name: josmase/${{ matrix.service }}
-      dockerfile: ${{ matrix.dockerfile-path }}
+      image_name: josmase/${{ matrix.project.service }}
+      dockerfile: ${{ matrix.project.dockerfile }}
       context: .
     secrets:
       registry_username: ${{ secrets.REGISTRY_USERNAME }}
