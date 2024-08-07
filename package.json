@@ -48,7 +48,7 @@
     "@nx/node": "18.3.5",
     "@nx/vite": "18.3.5",
     "@nx/vue": "18.3.5",
-    "@nx/web": "18.0.0",
+    "@nx/web": "18.3.5",
     "@nx/webpack": "18.3.5",
     "@nx/workspace": "18.0.0",
     "@swc-node/register": "~1.6.7",
