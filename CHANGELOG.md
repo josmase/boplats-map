@@ -49,3 +49,44 @@
 * 6ad9072 Merge pull request #1 from josmase/renovate/configure
 * 46a6309 Add renovate.json
 
+## v0.0.3
+
+* 2f9a8b5 Update dependency @nx/js to v18.3.5
+* 0a66d4e Merge pull request #31 from josmase/renovate/nx-webpack-18.x
+* e7525d0 Merge pull request #27 from josmase/renovate/nx-vite-18.x
+* d2922fc Merge pull request #20 from josmase/renovate/nx-eslint-18.x
+* 12f4cda Update dependency @nx/webpack to v18.3.5
+* 3f838eb Update dependency @nx/vite to v18.3.5
+* c21ba36 Update dependency @nx/eslint to v18.3.5
+* e948549 Update dependency vite to v5.0.13 [SECURITY]
+* c503fb4 Merge pull request #26 from josmase/renovate/nx-node-18.x
+* 00d8001 Update dependency @nx/vue to v18.3.5
+* 26a6523 Update dependency @nx/node to v18.3.5
+* 93b8921 Update dependency @nx/nest to v18.3.5
+* 8845d65 Merge pull request #3 from josmase/renovate/nestjs-common-10.x-lockfile
+* e5983c7 Merge pull request #4 from josmase/renovate/nestjs-config-3.x-lockfile
+* 9a34741 Merge pull request #5 from josmase/renovate/nestjs-core-10.x-lockfile
+* 4de95d6 Merge pull request #6 from josmase/renovate/nestjs-mongoose-10.x-lockfile
+* e0c74ab Merge pull request #7 from josmase/renovate/nestjs-platform-express-10.x-lockfile
+* 4bb1f8b Merge pull request #18 from josmase/renovate/nx-cypress-18.x
+* e4cf2a8 Merge pull request #19 from josmase/renovate/nx-esbuild-18.x
+* f2ca5b6 Merge pull request #21 from josmase/renovate/nx-eslint-plugin-18.x
+* 48e1a9c Update dependency @nestjs/core to v10.3.10
+* 6542a30 Update dependency @nestjs/config to v3.2.3
+* ef4ead3 Update dependency @nestjs/common to v10.3.10
+* c960234 Update dependency @nx/esbuild to v18.3.5
+* cebdd44 Update dependency @nx/cypress to v18.3.5
+* a297b2e Update dependency @nx/eslint-plugin to v18.3.5
+* 022aa92 Update dependency vue to v3.4.36
+* 8a11562 Update dependency @nx/jest to v18.3.5
+* d961ef6 Update dependency @nestjs/schematics to v10.1.3
+* 6741ce5 Update dependency @nestjs/platform-express to v10.3.10
+* af4987b Update dependency @nestjs/mongoose to v10.0.10
+* 36c0096 Merge pull request #10 from josmase/renovate/swc-helpers-0.x-lockfile
+* 1b3ad0d Update dependency @swc/helpers to v0.5.12
+* 61c3b0a Update dependency @nestjs/testing to v10.3.10
+* 4e4a73c Update dependency @nestjs/swagger to v7.4.0
+* 314025a Update dependency vue to v3.4.35
+* 55c1554 Update dependency ts-node to v10.9.2
+* 6a26161 Update dependency tslib to v2.6.3
+
