@@ -18,7 +18,7 @@ jobs:
 
     uses: josmase/workflows/.github/workflows/docker-build.yaml@main
     with:
-      runner: new-new-boplats
+      runner: my-runner
       registry_url: ${{ vars.REGISTRY_URL }}
       dockerfile: ${{ matrix.dockerfile-path }}
       context: .
