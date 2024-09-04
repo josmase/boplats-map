@@ -18,7 +18,7 @@ jobs:
 
     uses: josmase/workflows/.github/workflows/docker-build.yaml@main
     with:
-      runner: my-runner
+      runner: ${{ vars.RUNNER_NAME }}
       registry_url: ${{ vars.REGISTRY_URL }}
       dockerfile: ${{ matrix.dockerfile-path }}
       context: .

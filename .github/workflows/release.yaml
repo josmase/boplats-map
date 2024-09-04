@@ -24,7 +24,7 @@ jobs:
 
     uses: josmase/workflows/.github/workflows/docker-build-and-push.yaml@main
     with:
-      runner: my-runner
+      runner: ${{ vars.RUNNER_NAME }}
       registry_url: ${{ vars.REGISTRY_URL }}
       image_name: josmase/${{ matrix.project.service }}
       dockerfile: ${{ matrix.project.dockerfile }}
