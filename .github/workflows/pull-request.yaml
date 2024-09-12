@@ -21,7 +21,6 @@ jobs:
       runner: ${{ vars.RUNNER_NAME }}
       registry_url: ${{ vars.REGISTRY_URL }}
       dockerfile: ${{ matrix.dockerfile-path }}
-      context: .
     secrets:
       registry_username: ${{ secrets.REGISTRY_USERNAME }}
       registry_password: ${{ secrets.REGISTRY_PASSWORD }}
