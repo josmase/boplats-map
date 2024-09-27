@@ -9,11 +9,17 @@ jobs:
   validate:
     strategy:
       matrix:
-        dockerfile-path:
+        project:
           [
-            ./apps/frontend/Dockerfile,
-            ./apps/scraper/Dockerfile,
-            ./apps/api/Dockerfile,
+            {
+              service: new-new-boplats-frontend,
+              dockerfile: ./apps/frontend/Dockerfile,
+            },
+            {
+              service: new-new-boplats-scraper,
+              dockerfile: ./apps/scraper/Dockerfile,
+            },
+            { service: new-new-boplats-api, dockerfile: ./apps/api/Dockerfile },
           ]
 
     uses: josmase/workflows/.github/workflows/docker-build.yaml@main
@@ -21,7 +27,8 @@ jobs:
     with:
       runner: ${{ vars.RUNNER_NAME }}
       registry_url: ${{ vars.REGISTRY_URL }}
-      dockerfile: ${{ matrix.dockerfile-path }}
+      name: josmase/${{ matrix.project.service }}
+      dockerfile: ${{ matrix.project.dockerfile }}
     secrets:
       registry_username: ${{ secrets.REGISTRY_USERNAME }}
       registry_password: ${{ secrets.REGISTRY_PASSWORD }}
