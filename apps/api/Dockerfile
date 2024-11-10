@@ -1,4 +1,4 @@
-FROM registry-proxy.local.hejsan.xyz/library/node:18-alpine AS builder
+FROM artifactory.local.hejsan.xyz/docker/library/node:18-alpine AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build:api
 
-FROM registry-proxy.local.hejsan.xyz/library/node:18-alpine AS runner
+FROM artifactory.local.hejsan.xyz/docker/library/node:18-alpine AS runner
 ENV PORT 3000
 ENV DB_URI mongodb://localhost:27017/boplats?authSource=admin
 ENV DB_USERNAME root
