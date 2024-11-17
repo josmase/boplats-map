@@ -33,7 +33,7 @@ services:
 
   mongo:
     container_name: mongo
-    image: artifactory.local.hejsan.xyz/docker/library/mongo:4.4
+    image: artifactory.local.hejsan.xyz/docker/mongo:4.4
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
