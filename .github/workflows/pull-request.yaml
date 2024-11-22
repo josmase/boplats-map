@@ -25,7 +25,6 @@ jobs:
     uses: josmase/workflows/.github/workflows/docker-build.yaml@main
     name: pull-request-validation
     with:
-      runner: ${{ vars.RUNNER_NAME }}
       registry_url: ${{ vars.REGISTRY_URL }}
       name: josmase/${{ matrix.project.service }}
       dockerfile: ${{ matrix.project.dockerfile }}
