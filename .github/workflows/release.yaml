@@ -6,6 +6,8 @@ on:
       - 'v*.*.*'
 jobs:
   publish:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.head_ref }}
     strategy:
       matrix:
         project:
