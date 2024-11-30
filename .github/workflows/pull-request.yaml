@@ -28,6 +28,7 @@ jobs:
       registry_url: ${{ vars.REGISTRY_URL }}
       name: josmase/${{ matrix.project.service }}
       dockerfile: ${{ matrix.project.dockerfile }}
+      cache: false
     secrets:
       registry_username: ${{ secrets.REGISTRY_USERNAME }}
       registry_password: ${{ secrets.REGISTRY_PASSWORD }}
