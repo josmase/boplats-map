@@ -1,10 +1,16 @@
-FROM artifactory.local.hejsan.xyz/docker/node:18-alpine AS builder
+FROM artifactory.local.hejsan.xyz/docker/node:18-alpine AS npm
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
 RUN npm ci
+
+FROM artifactory.local.hejsan.xyz/docker/node:18-alpine AS builder
+
+WORKDIR /app
+
+COPY --from=npm /app/node_modules /app/node_modules
 
 COPY . .
 
