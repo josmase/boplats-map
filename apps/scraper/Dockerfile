@@ -14,7 +14,7 @@ COPY --from=npm /app/node_modules /app/node_modules
 
 COPY . .
 
-RUN npm run build:scraper --verbose
+RUN npm run build:scraper
 
 FROM artifactory.local.hejsan.xyz/docker/node:18-alpine AS runner
 ENV DB_URI mongodb://localhost:27017/boplats?authSource=admin

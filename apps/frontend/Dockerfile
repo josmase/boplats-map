@@ -14,7 +14,7 @@ COPY --from=npm /app/node_modules /app/node_modules
 
 COPY . .
 
-RUN npm run build:frontend --verbose
+RUN npm run build:frontend
 
 FROM artifactory.local.hejsan.xyz/docker/nginx:1.27.0-alpine AS runner
 
