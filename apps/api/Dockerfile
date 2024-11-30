@@ -14,7 +14,7 @@ COPY --from=npm /app/node_modules /app/node_modules
 
 COPY . .
 
-RUN npm run build:api
+RUN npm run build:api --verbose
 
 FROM artifactory.local.hejsan.xyz/docker/node:18-alpine AS runner
 ENV PORT 3000
