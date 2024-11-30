@@ -7,8 +7,6 @@ on:
 
 jobs:
   validate:
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.head_ref }}
     strategy:
       matrix:
         project:
