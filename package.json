@@ -65,7 +65,7 @@
     "@vitest/ui": "^1.0.4",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vue/eslint-config-prettier": "7.1.0",
-    "@vue/eslint-config-typescript": "^11.0.3",
+    "@vue/eslint-config-typescript": "^14.0.0",
     "@vue/test-utils": "^2.4.1",
     "cheerio": "^1.0.0-rc.12",
     "cypress": "^13.0.0",
