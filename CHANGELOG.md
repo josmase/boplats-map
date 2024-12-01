@@ -1,3 +1,22 @@
+## 0.0.4
+
+* 2736400 Merge pull request #156 from josmase/renovate/date-fns-4.x
+* abc426f Merge pull request #155 from josmase/renovate/jsdom-25.x
+* 5bf20a4 Merge pull request #153 from josmase/renovate/nestjs-mongoose-10.x-lockfile
+* 8b2313d Merge pull request #152 from josmase/renovate/nestjs-config-3.x-lockfile
+* e742ac5 Merge pull request #151 from josmase/renovate/ts-jest-29.x-lockfile
+* f983e7e Merge pull request #138 from josmase/renovate/artifactory.local.hejsan.xyz-docker-nginx-1.x
+* 4b9994d Update dependency date-fns to v4
+* 30d2be2 Update dependency jsdom to v25
+* d45cdcf Update dependency @nestjs/mongoose to v10.1.0
+* cbde292 Update dependency @nestjs/config to v3.3.0
+* 03c837f Update dependency ts-jest to v29.2.5
+* b480c7a Update dependency vite to v5.4.6 [SECURITY]
+* ba483e8 Update artifactory.local.hejsan.xyz/docker/nginx Docker tag to v1.27.3
+* f6be564 Remove e2e testing apps
+* a7f7ea8 Add verbose to build
+* 8afe8fe Add verbose to build step
+
 ## 0.0.3
 
 * ce44c5e Merge pull request #105 from josmase/renovate/nx-eslint-plugin-20.x
