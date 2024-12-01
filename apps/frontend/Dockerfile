@@ -1,4 +1,4 @@
-FROM artifactory.local.hejsan.xyz/docker/node:18-alpine AS npm
+FROM artifactory.local.hejsan.xyz/docker/node:22-alpine@sha256:b64ced2e7cd0a4816699fe308ce6e8a08ccba463c757c00c14cd372e3d2c763e AS npm
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 
 RUN npm ci
 
-FROM artifactory.local.hejsan.xyz/docker/node:18-alpine AS builder
+FROM artifactory.local.hejsan.xyz/docker/node:22-alpine@sha256:b64ced2e7cd0a4816699fe308ce6e8a08ccba463c757c00c14cd372e3d2c763e AS builder
 
 WORKDIR /app
 
