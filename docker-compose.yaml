@@ -33,7 +33,7 @@ services:
 
   mongo:
     container_name: mongo
-    image: artifactory.local.hejsan.xyz/docker/mongo:4.4
+    image: artifactory.local.hejsan.xyz/docker/mongo:8.0@sha256:c165af1a407eefce644877bf5a59ba3d9ca762e62b4f1723c919dc08dc32f4d0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
