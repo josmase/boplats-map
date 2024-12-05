@@ -36,7 +36,7 @@
   "devDependencies": {
     "@nestjs/mongoose": "^10.0.4",
     "@nestjs/schematics": "^10.1.3",
-    "@nestjs/testing": "^10.3.3",
+    "@nestjs/testing": "^10.4.12",
     "@nx/cypress": "20.1.4",
     "@nx/deno": "^17.2.3",
     "@nx/esbuild": "20.1.4",
