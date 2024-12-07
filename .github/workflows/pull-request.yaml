@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - 'main'
+    paths-ignore:
+      - '.github/**'
 
 jobs:
   validate:
@@ -26,6 +28,7 @@ jobs:
     name: pull-request-validation
     with:
       registry_url: ${{ vars.REGISTRY_URL }}
+      registry_cache_url: ${{ vars.REGISTRY_CACHE_URL }}
       name: josmase/${{ matrix.project.service }}
       dockerfile: ${{ matrix.project.dockerfile }}
     secrets:
