@@ -47,7 +47,7 @@ jobs:
             {
               name: new-new-boplats-scraper,
               image: new-new-boplats-scraper,
-              file-path: apps/production/new-new-boplats/scraper/deployment.yaml,
+              file-path: apps/production/new-new-boplats/scraper/cronjob.yaml,
               kind: cronjob,
             },
             {
