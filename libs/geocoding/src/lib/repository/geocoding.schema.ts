@@ -1,16 +1,9 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, HydratedDocument } from 'mongoose';
+import { type Document, model, Schema } from "mongoose";
 
-@Schema()
-export class GeocodingFeature {
-  @Prop({ required: true, unique: true })
+export interface GeocodingFeature extends Document {
   queryId: string;
-
-  @Prop()
-  type: string;
-
-  @Prop({ type: Object })
-  properties: {
+  type?: string;
+  properties?: {
     place_id: number;
     osm_type: string;
     osm_id: number;
@@ -22,22 +15,55 @@ export class GeocodingFeature {
     name: string;
     display_name: string;
   };
-
-  @Prop()
-  bbox: [number, number, number, number];
-
-  @Prop({ type: Object })
-  geometry: {
+  bbox?: [number, number, number, number];
+  geometry?: {
     type: string;
     coordinates: [number, number];
   };
-
-  @Prop({ default: Date.now })
   createdAt: Date;
-
-  @Prop({ default: Date.now })
   updatedAt: Date;
 }
-export type GeoCodingDocument = HydratedDocument<GeocodingFeature>;
-export const GeocodingFeatureSchema =
-  SchemaFactory.createForClass(GeocodingFeature);
+
+const GeocodingFeatureSchema = new Schema<GeocodingFeature>(
+  {
+    queryId: { type: String, required: true, unique: true },
+    type: { type: String },
+    properties: {
+      place_id: { type: Number },
+      osm_type: { type: String },
+      osm_id: { type: Number },
+      place_rank: { type: Number },
+      category: { type: String },
+      type: { type: String },
+      importance: { type: Number },
+      addresstype: { type: String },
+      name: { type: String },
+      display_name: { type: String },
+    },
+    bbox: {
+      type: [Number],
+      validate: {
+        validator: (v: number[]) => v.length === 4,
+        message: "bbox must have exactly four numbers",
+      },
+    },
+    geometry: {
+      type: {
+        type: String,
+      },
+      coordinates: {
+        type: [Number],
+        validate: {
+          validator: (v: number[]) => v.length === 2,
+          message: "geometry.coordinates must have exactly two numbers",
+        },
+      },
+    },
+  },
+  { timestamps: true },
+);
+
+export const GeocodingFeatureModel = model<GeocodingFeature>(
+  "GeocodingFeature",
+  GeocodingFeatureSchema,
+);

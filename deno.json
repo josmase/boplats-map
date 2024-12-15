@@ -1,0 +1,20 @@
+{
+  "nodeModulesDir": "auto",
+  "workspace": ["./apps/*", "./libs/*"],
+  "tasks": {
+    "start:web": "deno task --cwd apps/web dev",
+    "build:web": "deno task --cwd apps/web build",
+
+    "start:api": "deno task --cwd apps/api start",
+    "build:api": "deno task --cwd apps/api install",
+
+    "start:scraper": "deno task --cwd apps/scraper start",
+    "build:scraper": "deno task --cwd apps/scraper install",
+
+    "coverage:all": "deno test --coverage && deno coverage --lcov --output=cov.lcov"
+  },
+  "imports": {
+    "@std/expect": "jsr:@std/expect@^1.0.8",
+    "@std/testing": "jsr:@std/testing@^1.0.5"
+  }
+}

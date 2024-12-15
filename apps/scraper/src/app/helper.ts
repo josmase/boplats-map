@@ -1,12 +1,12 @@
-import { Apartment } from '@boplats-map/apartment';
-import { StructuredQuery } from '@boplats-map/geocoding';
+import { Apartment } from "@new-new-boplats/apartment-repository";
+import { StructuredQuery } from "@new-new-boplats/geocoding";
 
 export function mapApartmentToStructuredQuery(
-  apartment: Partial<Apartment>
+  apartment: Partial<Apartment>,
 ): Partial<StructuredQuery> {
   return {
     street: apartment?.address,
     city: apartment?.areaName,
-    country: 'Sweden',
+    country: "Sweden",
   };
 }

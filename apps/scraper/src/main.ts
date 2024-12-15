@@ -1,19 +1,18 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
+import ApartmentService from "./app/apartment.service.ts";
+import { scraperConfiguration } from "./app/config/scraper.configuration.ts";
+import { geoCodingService } from "@new-new-boplats/geocoding";
+import { apartmentRepository } from "@new-new-boplats/apartment-repository";
+import { mongooseModule } from "@new-new-boplats/mongoose";
 
-import { NestFactory } from '@nestjs/core';
+async function main() {
+  await mongooseModule.connect();
+  const apartmentService = new ApartmentService(
+    scraperConfiguration,
+    apartmentRepository,
+    geoCodingService,
+  );
 
-import { AppModule } from './app/app.module';
-import { ApartmentService } from './app/apartment.service';
-import { exit } from 'process';
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const myService = app.get(ApartmentService);
-  await myService.scrapeAndSaveApartments();
-  exit();
+  await apartmentService.scrapeAndSaveApartments();
 }
 
-bootstrap();
+main();

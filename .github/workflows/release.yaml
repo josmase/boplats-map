@@ -3,17 +3,14 @@ name: Release Docker image
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 jobs:
   publish:
     strategy:
       matrix:
         project:
           [
-            {
-              service: new-new-boplats-frontend,
-              dockerfile: ./apps/frontend/Dockerfile,
-            },
+            { service: new-new-boplats-web, dockerfile: ./apps/web/Dockerfile },
             {
               service: new-new-boplats-scraper,
               dockerfile: ./apps/scraper/Dockerfile,
@@ -42,8 +39,8 @@ jobs:
         project:
           [
             {
-              name: new-new-boplats-frontend,
-              image: new-new-boplats-frontend,
+              name: new-new-boplats-web,
+              image: new-new-boplats-web,
               file-path: apps/production/new-new-boplats/frontend/deployment.yaml,
               kind: deployment,
             },

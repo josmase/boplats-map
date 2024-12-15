@@ -1,0 +1,8 @@
+{
+  "name": "@new-new-boplats/mongoose",
+  "version": "0.1.0",
+  "exports": "./lib/mod.ts",
+  "imports": {
+    "mongoose": "npm:mongoose@^8.8.3"
+  }
+}

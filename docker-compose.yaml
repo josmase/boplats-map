@@ -21,11 +21,11 @@ services:
       - DB_URI=mongodb://root:example@mongo:27017/boplats?authSource=admin
     depends_on:
       - mongo
-  frontend:
-    container_name: frontend
+  web:
+    container_name: web
     build:
       context: .
-      dockerfile: apps/frontend/Dockerfile
+      dockerfile: apps/web/Dockerfile
     environment:
       - API_URL=http://localhost:3000
     ports:

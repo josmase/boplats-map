@@ -1,7 +1,10 @@
-import { registerAs } from '@nestjs/config';
+export type NominatimConfiguration = typeof nominatimConfiguration;
 
-export default registerAs('nominatim', () => ({
-  userAgent: process.env.USER_AGENT || 'Boplats-Map',
-  apiUrl: process.env.API_URL || 'https://nominatim.openstreetmap.org',
-  timeBetweenRequestsMs: parseInt(process.env.TIME_BETWEEN_REQUESTS_MS) || 1500,
-}));
+export const nominatimConfiguration = {
+  userAgent: Deno.env.get("USER_AGENT") || "Boplats-Map",
+  apiUrl: Deno.env.get("API_URL") ||
+    "https://nominatim.openstreetmap.org",
+  timeBetweenRequestsMs: parseInt(
+    Deno.env.get("TIME_BETWEEN_REQUESTS_MS") || "1500",
+  ),
+};

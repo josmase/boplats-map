@@ -3,9 +3,9 @@ name: Pull Request Validation
 on:
   pull_request:
     branches:
-      - 'main'
+      - "main"
     paths-ignore:
-      - '.github/**'
+      - ".github/**"
 
 jobs:
   validate:
@@ -13,10 +13,7 @@ jobs:
       matrix:
         project:
           [
-            {
-              service: new-new-boplats-frontend,
-              dockerfile: ./apps/frontend/Dockerfile,
-            },
+            { service: new-new-boplats-web, dockerfile: ./apps/web/Dockerfile },
             {
               service: new-new-boplats-scraper,
               dockerfile: ./apps/scraper/Dockerfile,

@@ -1,21 +1,24 @@
-import { parseISO } from 'date-fns';
-import { Floor, Price, Size } from '@boplats-map/apartment';
-import { Logger } from '@nestjs/common';
+import { parseISO } from "date-fns";
+import type {
+  Floor,
+  Price,
+  Size,
+} from "../../../../apartment-repository/src/mod.ts";
 
-export function parsePrice(price: string): Price | null {
+export function parsePrice(price: string): Price | undefined {
   const regex = /^(\d[\d\s]*)\s+(\w+)$/;
   const match = price.match(regex);
 
   if (match) {
-    const amount = parseInt(match[1].replace(/\s/g, ''), 10);
+    const amount = parseInt(match[1].replace(/\s/g, ""), 10);
     const currency = match[2];
     return { amount, currency };
   }
-  Logger.warn('Unable to parse price:', price);
-  return null;
+  console.warn("Unable to parse price:", price);
+  return undefined;
 }
 
-export function parseSize(size: string): Size | null {
+export function parseSize(size: string): Size | undefined {
   const regex = /^([\d.]+)\s+(.+)/;
   const match = size.match(regex);
 
@@ -25,26 +28,26 @@ export function parseSize(size: string): Size | null {
 
     return { amount, unit };
   }
-  Logger.warn('Unable to parse size:', size);
-  return null;
+  console.warn("Unable to parse size:", size);
+  return undefined;
 }
 
 export function parsePublicationDate(date: string, today: Date) {
-  return parseDateString(date.replace('Publ.', '').trim(), today);
+  return parseDateString(date.replace("Publ.", "").trim(), today);
 }
 
 function parseDateString(unparsedDate: string, today: Date) {
-  if (unparsedDate.toLowerCase() === 'idag') {
+  if (unparsedDate.toLowerCase() === "idag") {
     return today;
   }
 
-  if (unparsedDate.toLowerCase() === 'igår') {
+  if (unparsedDate.toLowerCase() === "igår") {
     const yesterday = new Date(today);
     yesterday.setDate(today.getDate() - 1);
     return yesterday;
   }
 
-  if (unparsedDate.toLowerCase() === 'i förrgår') {
+  if (unparsedDate.toLowerCase() === "i förrgår") {
     const dayBeforeYesterday = new Date(today);
     dayBeforeYesterday.setDate(today.getDate() - 2);
     return dayBeforeYesterday;
@@ -52,13 +55,13 @@ function parseDateString(unparsedDate: string, today: Date) {
 
   const parsedDate = parseISO(unparsedDate);
   if (isNaN(parsedDate.getTime())) {
-    Logger.warn('Unable to parse date:', unparsedDate);
-    return null;
+    console.warn("Unable to parse date:", unparsedDate);
+    return undefined;
   }
   return parsedDate;
 }
 
-export function parseFloor(floor: string): Floor | null {
+export function parseFloor(floor: string): Floor | undefined {
   const regex = /(\d+)\s+av\s+(\d+)/;
 
   const match = floor.match(regex);
@@ -77,11 +80,11 @@ export function parseFloor(floor: string): Floor | null {
     return { actual };
   }
 
-  Logger.warn('Unable to parse floor:', floor);
-  return null;
+  console.warn("Unable to parse floor:", floor);
+  return undefined;
 }
 
-export function parseRoomCount(roomCount: string): number | null {
+export function parseRoomCount(roomCount: string): number | undefined {
   const regex = /^(\d+)\s+rum$/;
 
   const match = roomCount.match(regex);
@@ -89,5 +92,5 @@ export function parseRoomCount(roomCount: string): number | null {
     const number = parseInt(match[1], 10);
     return number;
   }
-  return null;
+  return undefined;
 }

@@ -1,8 +1,0 @@
-{
-  "name": "geocoding",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/geocoding/src",
-  "projectType": "library",
-  "targets": {},
-  "tags": []
-}
