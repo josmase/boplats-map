@@ -79,7 +79,7 @@
     "jest-environment-node": "^29.4.1",
     "jsdom": "~25.0.0",
     "leaflet": "^1.9.4",
-    "mongoose": "^8.5.2",
+    "mongoose": "^8.9.0",
     "nx": "18.3.5",
     "prettier": "^2.6.2",
     "sass": "1.83.0",
