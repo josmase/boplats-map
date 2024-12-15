@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 
 services:
   api:
@@ -33,7 +33,7 @@ services:
 
   mongo:
     container_name: mongo
-    image: artifactory.local.hejsan.xyz/docker/mongo:8.0@sha256:c165af1a407eefce644877bf5a59ba3d9ca762e62b4f1723c919dc08dc32f4d0
+    image: artifactory.local.hejsan.xyz/docker/mongo:4.2.0
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -49,6 +49,6 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://unifi:pass@media.local.hejsan.xyz:27017/unifi-db
-    #depends_on:
-    # - mongo
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/boplats
+    depends_on:
+     - mongo
