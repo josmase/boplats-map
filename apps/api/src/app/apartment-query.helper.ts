@@ -34,12 +34,16 @@ export class ApartmentQueryHelper {
   createQueryFromRequest(
     request: GetApartmentRequest,
   ): FilterQuery<Apartment> {
-    return {
+    const query = {
       ...this.buildDateQuery(request),
       ...this.buildRoomsQuery(request),
       ...this.buildPriceQuery(request),
       ...this.buildSizeQuery(request),
     };
+
+    console.debug(`Converted request to query:`, request, query);
+
+    return query;
   }
 
   private buildDateQuery(request?: GetApartmentRequest): DateQuery {

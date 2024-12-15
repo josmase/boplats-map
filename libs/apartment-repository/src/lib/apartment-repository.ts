@@ -10,6 +10,7 @@ export class ApartmentRepository {
     apartmentData: Partial<Apartment>,
   ): Promise<Apartment | null> {
     try {
+      console.info(`Upserting apartment: ${apartmentData.link}`);
       const result = await this.model.findOneAndUpdate(
         { link: apartmentData.link },
         apartmentData,
@@ -24,6 +25,7 @@ export class ApartmentRepository {
 
   async deleteApartment(_id: string): Promise<Apartment | null> {
     try {
+      console.info(`Deleting apartment: ${_id}`);
       const result = await this.model.findOneAndDelete({ _id });
       return result;
     } catch (error) {
@@ -33,7 +35,7 @@ export class ApartmentRepository {
 
   async searchApartments(query: FilterQuery<Apartment>): Promise<Apartment[]> {
     try {
-      console.log(`Running query: ${JSON.stringify(query)}`);
+      console.log(`Querying apartments: ${JSON.stringify(query)}`);
       const results = await this.model.find(query);
       return results;
     } catch (error) {
