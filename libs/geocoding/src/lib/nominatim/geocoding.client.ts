@@ -1,19 +1,14 @@
-import fetch from 'node-fetch';
-import { StructuredQuery } from './request';
-import { GeocodingResponse } from './response';
-import { Inject, Injectable, Logger } from '@nestjs/common';
-import { ConfigService, ConfigType } from '@nestjs/config';
-import nominatimConfiguration from '../config/nominatim.configuration';
+import type { NominatimConfiguration } from "../config/nominatim.configuration.ts";
+import type { StructuredQuery } from "./request.ts";
+import type { GeocodingResponse } from "./response.ts";
 
 interface QueryParams extends StructuredQuery {
   q: string;
-  format: 'geojson';
+  format: "geojson";
 }
-@Injectable()
 export class GeocodingClient {
   constructor(
-    @Inject(nominatimConfiguration.KEY)
-    private readonly config: ConfigType<typeof nominatimConfiguration>
+    private readonly config: NominatimConfiguration,
   ) {}
 
   async geocode(query: string | Partial<StructuredQuery>) {
@@ -22,10 +17,10 @@ export class GeocodingClient {
     const url = `${this.config.apiUrl}?${queryParams}`;
 
     try {
-      Logger.debug('Attempting to geocode:', url);
+      console.debug("Attempting to geocode:", url);
       const response = await fetch(url, {
         headers: {
-          'User-Agent': this.config.userAgent,
+          "User-Agent": this.config.userAgent,
         },
       });
 
@@ -36,15 +31,15 @@ export class GeocodingClient {
       const data: GeocodingResponse = await response.json();
       return data;
     } catch (error) {
-      throw new Error(`Error performing geocoding: ${error.message}`);
+      throw new Error(`Error performing geocoding: ${error}`);
     }
   }
 
   private createQueryParams(query: string | Partial<StructuredQuery>) {
     let params: Partial<QueryParams> = {
-      format: 'geojson',
+      format: "geojson",
     };
-    if (typeof query === 'string') {
+    if (typeof query === "string") {
       params = { ...params, q: query };
     } else {
       params = { ...params, ...query };

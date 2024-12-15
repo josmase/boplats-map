@@ -1,44 +1,26 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
+import { Application, Router } from "@oak/oak";
+import registerApartmentController from "./app/apartment.controller.ts";
+import { ApartmentService } from "./app/apartment.service.ts";
+import { apartmentRepository } from "@new-new-boplats/apartment-repository";
+import { ApartmentQueryHelper } from "./app/apartment-query.helper.ts";
+import { mongooseModule } from "@new-new-boplats/mongoose";
 
-import { Logger, ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+await mongooseModule.connect();
 
-import { AppModule } from './app/app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+const app = new Application();
+let router = new Router();
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+router = registerApartmentController(
+  router,
+  new ApartmentService(
+    apartmentRepository,
+    new ApartmentQueryHelper(),
+  ),
+);
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
-    })
-  );
+app.use(router.routes());
+app.use(router.allowedMethods());
 
-  const config = new DocumentBuilder()
-    .setTitle('Apartments')
-    .setDescription('Available apartments in boplats')
-    .setVersion('1.0')
-    .addTag('apartments')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/`,
-    'Bootstrap'
-  );
-  Logger.log(
-    `📚 Swagger API documentation available at: http://localhost:${port}/swagger`,
-    'Bootstrap'
-  );
-}
-
-bootstrap();
+const port = parseInt(Deno.env.get("PORT") || "3000");
+console.info(`Listening on port ${port}`);
+await app.listen({ port });

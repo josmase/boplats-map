@@ -1,8 +1,6 @@
-node_modules
-dist
-.github
 .git
-**/Dockerfile
-docker-compose.yaml
+node_modules
+coverage
+.coverage
+Dockerfile
 .vscode
-.nx

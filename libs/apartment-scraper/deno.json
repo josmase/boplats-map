@@ -1,0 +1,9 @@
+{
+  "name": "@new-new-boplats/apartment-scraper",
+  "version": "0.1.0",
+  "exports": "./src/mod.ts",
+  "imports": {
+    "cheerio": "https://esm.sh/cheerio@1.0.0",
+    "date-fns": "npm:date-fns@4.1.0"
+  }
+}

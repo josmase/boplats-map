@@ -1,16 +1,16 @@
-import { createHash } from 'crypto';
-import { StructuredQuery } from './request';
+import { createHash } from "crypto";
+import type { StructuredQuery } from "./request.ts";
 
 interface QueryParams extends StructuredQuery {
   q: string;
-  format: 'geojson';
+  format: "geojson";
 }
 
 export function createQueryParams(query: string | Partial<StructuredQuery>) {
   let params: Partial<QueryParams> = {
-    format: 'geojson',
+    format: "geojson",
   };
-  if (typeof query === 'string') {
+  if (typeof query === "string") {
     params = { ...params, q: query };
   } else {
     params = { ...params, ...query };
@@ -22,5 +22,5 @@ export function createQueryParams(query: string | Partial<StructuredQuery>) {
 
 export function hashQuery(query: URLSearchParams): string {
   const normalizedQuery = JSON.stringify(query);
-  return createHash('sha1').update(normalizedQuery).digest('base64');
+  return createHash("sha1").update(normalizedQuery).digest("base64");
 }
