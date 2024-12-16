@@ -1,3 +1,9 @@
+## 0.0.9
+
+* 9a7093b Use mongodb image that does not require avx
+* 7fec11d Log more about what is being queried
+* a75dff2 Add request logging
+
 ## 0.0.5
 
 * 4305dc0 Rewrite the whole thing in deno
@@ -26,5 +32,3 @@
 * 56cda76 Update dependency @nestjs/schematics to ^10.1.3
 * 6fe627f Update dependency vite to ^5.4.6
 * c3ad262 Update dependency @nx/webpack to v20
-
-
