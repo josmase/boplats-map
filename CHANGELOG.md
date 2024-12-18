@@ -1,3 +1,7 @@
+## 0.0.10
+
+* c0616ee Use latest mongodb image
+
 ## 0.0.9
 
 * 9a7093b Use mongodb image that does not require avx
