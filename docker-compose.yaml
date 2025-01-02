@@ -33,7 +33,7 @@ services:
 
   mongo:
     container_name: mongo
-    image: artifactory.local.hejsan.xyz/docker/mongo:8.0.0
+    image: artifactory.local.hejsan.xyz/docker/flakybitnet/mongodb-server:7.0.16-fb2
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
