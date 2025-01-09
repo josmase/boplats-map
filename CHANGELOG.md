@@ -1,3 +1,7 @@
+## 0.0.11
+
+* 4545466 Use non-avx mongodb server
+
 ## 0.0.10
 
 * c0616ee Use latest mongodb image
