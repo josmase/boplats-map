@@ -31,7 +31,6 @@ const ApartmentSchema = new Schema<Apartment>(
     location: {
       type: Object,
       required: true,
-      unique: true,
     },
   },
   { timestamps: true },
