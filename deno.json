@@ -1,6 +1,14 @@
 {
   "nodeModulesDir": "auto",
-  "workspace": ["./apps/*", "./libs/*"],
+  "workspace": [
+    "./apps/web",
+    "./apps/scraper",
+    "./apps/api",
+    "./libs/apartment-repository",
+    "./libs/apartment-scraper",
+    "./libs/geocoding",
+    "./libs/mongoose"
+  ],
   "tasks": {
     "start:web": "deno task --cwd apps/web dev",
     "build:web": "deno task --cwd apps/web build",
