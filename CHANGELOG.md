@@ -1,3 +1,10 @@
+## 0.0.12
+
+* 86c3af4 Fix deno build errors
+* 4a34603 Allow same location on multiple apartments
+* 2cc9175 Add Vue extension
+* cc4b4c9 Add devcontainer
+
 ## 0.0.11
 
 * 4545466 Use non-avx mongodb server
