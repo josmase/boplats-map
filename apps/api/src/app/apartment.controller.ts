@@ -6,7 +6,9 @@ export default function registerApartmentController(
   apartmentService: ApartmentService,
 ) {
   return router
-    .get("/apartments", ({ response, params }) => {
-      response.body = apartmentService.getApartments(params);
+    .get("/apartments", async ({ request, response }) => {
+      response.body = await apartmentService.getApartments(
+        Object.fromEntries(request.url.searchParams),
+      );
     });
 }

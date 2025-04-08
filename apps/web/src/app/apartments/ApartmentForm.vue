@@ -86,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits, watch } from 'vue';
+import { ref, watch } from 'vue';
 import type { GetApartmentRequest } from './api/requests';
 
 const roomOptions = generateOptions(1, 6, 1);

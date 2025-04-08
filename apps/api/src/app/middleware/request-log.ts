@@ -23,7 +23,7 @@ function request(ctx: Context) {
 
   return `${
     colors.cyan(
-      `${ctx.request.url.pathname}${ctx.request.url.search} ${requestBody} ${responseBody}`
+      `${ctx.request.url} ${requestBody} ${responseBody}`
         .trim(),
     )
   }`;

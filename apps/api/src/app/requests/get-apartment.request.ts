@@ -1,4 +1,4 @@
-export class GetApartmentRequest {
+export interface GetApartmentRequest {
   dateStart?: Date;
   dateEnd?: Date;
   roomsMin?: number;
