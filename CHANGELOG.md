@@ -1,3 +1,7 @@
+## 0.0.17
+
+* c9c9a86 Ignore docker compose
+
 ## 0.0.13
 
 * 3c04779 Use correct params and wait for the response
