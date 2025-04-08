@@ -39,10 +39,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import type { ApartmentDto } from './api/responses';
 
-const props = defineProps<{ apartment: ApartmentDto }>();
+defineProps<{ apartment: ApartmentDto }>();
 
 // Method to format date
 const formatDate = (date: Date) => {
