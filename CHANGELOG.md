@@ -1,3 +1,12 @@
+## 0.0.13
+
+* 3c04779 Use correct params and wait for the response
+* 2684944 Use interface instead of class
+* 500021f Remove deprecated Deno flag
+* 8c0c9a4 Include query params in log middleware
+* ff28def  Add npm: prefix to Node.js imports in Vite config
+* 11e3478 Fix unable to access containers started from docker-compose in devcontainer
+
 ## 0.0.12
 
 * 86c3af4 Fix deno build errors
