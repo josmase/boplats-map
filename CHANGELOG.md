@@ -1,3 +1,9 @@
+## 0.0.18
+
+* 29018b0 Add darkmode to map
+* 012a90b Fix incorrect size and missing tiles in map
+* 80a6c62 Add devproxy
+
 ## 0.0.17
 
 * c9c9a86 Ignore docker compose
