@@ -23,6 +23,7 @@ import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet';
 import type { ApartmentDto } from './api/responses';
 import type { LatLngExpression, PointExpression } from 'leaflet';
 import Apartment from './Apartment.vue';
+import "leaflet/dist/leaflet.css";
 
 const gothenburg: PointExpression = [57.6601183, 11.988888];
 
