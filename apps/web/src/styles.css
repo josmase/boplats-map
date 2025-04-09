@@ -63,10 +63,25 @@ pre {
 
 .leaflet-popup-content-wrapper {
   padding: 0 !important;
+  margin-bottom: -20px !important;
   .leaflet-popup-close-button {
     display: none;
   }
   .leaflet-popup-content {
     margin: 0 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .leaflet-layer,
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out,
+  .leaflet-control-attribution {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%)
+      !important;
+  }
+
+  .leaflet-container {
+    background: #000 !important;
   }
 }

@@ -1,18 +1,11 @@
 <template>
-  <l-map
-    ref="map"
-    v-model:zoom="zoom"
-    v-model:center="center"
-    :useGlobalLeaflet="false"
-  >
-    <l-tile-layer
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      layer-type="base"
-      name="© OpenStreetMap contributors"
-      attribution="© OpenStreetMap contributors"
-    ></l-tile-layer>
+  <l-map ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false">
+    <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" layer-type="base"
+      name="© OpenStreetMap contributors" attribution="© OpenStreetMap contributors" className='map-tiles'></l-tile-layer>
     <l-marker v-for="apartment in apartments" :lat-lng="toLatLng(apartment)">
-      <l-popup><Apartment :apartment></Apartment></l-popup>
+      <l-popup>
+        <Apartment :apartment></Apartment>
+      </l-popup>
     </l-marker>
   </l-map>
 </template>
@@ -23,6 +16,7 @@ import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet';
 import type { ApartmentDto } from './api/responses';
 import type { LatLngExpression, PointExpression } from 'leaflet';
 import Apartment from './Apartment.vue';
+import "leaflet/dist/leaflet.css";
 
 const gothenburg: PointExpression = [57.6601183, 11.988888];
 

@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import type { ApartmentDto } from "./responses.ts";
 import type { GetApartmentRequest } from "./requests.ts";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "/api";
 
 export default function useApartmentApi() {
   const responseData = ref<ApartmentDto[] | null>(null);
