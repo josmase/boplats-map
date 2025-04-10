@@ -1,7 +1,8 @@
 <template>
   <l-map ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false">
     <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" layer-type="base"
-      name="© OpenStreetMap contributors" attribution="© OpenStreetMap contributors" className='map-tiles'></l-tile-layer>
+      name="© OpenStreetMap contributors" attribution="© OpenStreetMap contributors"
+      className='map-tiles'></l-tile-layer>
     <l-marker v-for="apartment in apartments" :lat-lng="toLatLng(apartment)">
       <l-popup>
         <Apartment :apartment></Apartment>

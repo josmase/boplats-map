@@ -1,30 +1,18 @@
 <template>
-  <form
-    @submit.prevent="submitForm"
-    @change="submitForm"
-    class="apartment-form"
-  >
+  <form @submit.prevent="submitForm" @change="submitForm" class="apartment-form">
     <div class="form-group">
       <h3>Rooms</h3>
       <div class="select-container">
         <select id="roomsMin" v-model="formData.roomsMin">
           <option :value="undefined">Min</option>
-          <option
-            v-for="option in roomOptions"
-            :value="option.value"
-            :key="option.value"
-          >
+          <option v-for="option in roomOptions" :value="option.value" :key="option.value">
             {{ option.label }}
           </option>
         </select>
 
         <select id="roomsMax" v-model="formData.roomsMax">
           <option :value="undefined">Max</option>
-          <option
-            v-for="option in roomOptions"
-            :value="option.value"
-            :key="option.value"
-          >
+          <option v-for="option in roomOptions" :value="option.value" :key="option.value">
             {{ option.label }}
           </option>
         </select>
@@ -35,22 +23,14 @@
       <div class="select-container">
         <select id="rentMin" v-model="formData.rentMin">
           <option :value="undefined">Min</option>
-          <option
-            v-for="option in rentOptions"
-            :value="option.value"
-            :key="option.value"
-          >
+          <option v-for="option in rentOptions" :value="option.value" :key="option.value">
             {{ option.label }}
           </option>
         </select>
 
         <select id="rentMax" v-model="formData.rentMax">
           <option :value="undefined">Max</option>
-          <option
-            v-for="option in rentOptions"
-            :value="option.value"
-            :key="option.value"
-          >
+          <option v-for="option in rentOptions" :value="option.value" :key="option.value">
             {{ option.label }}
           </option>
         </select>
@@ -61,22 +41,14 @@
       <div class="select-container">
         <select id="sizeMin" v-model="formData.sizeMin">
           <option :value="undefined">Min</option>
-          <option
-            v-for="option in sizeOptions"
-            :value="option.value"
-            :key="option.value"
-          >
+          <option v-for="option in sizeOptions" :value="option.value" :key="option.value">
             {{ option.label }}
           </option>
         </select>
 
         <select id="sizeMax" v-model="formData.sizeMax">
           <option :value="undefined">Max</option>
-          <option
-            v-for="option in sizeOptions"
-            :value="option.value"
-            :key="option.value"
-          >
+          <option v-for="option in sizeOptions" :value="option.value" :key="option.value">
             {{ option.label }}
           </option>
         </select>
@@ -96,7 +68,7 @@ const sizeOptions = generateOptions(20, 100, 10);
 var daysAgo = new Date(); // today!
 daysAgo.setDate(daysAgo.getDate() - 5);
 const formData = ref<GetApartmentRequest>({
-  dateStart: daysAgo,
+  dateStart: undefined,
   dateEnd: undefined,
   roomsMin: undefined,
   roomsMax: undefined,
@@ -104,6 +76,7 @@ const formData = ref<GetApartmentRequest>({
   rentMax: undefined,
   sizeMin: undefined,
   sizeMax: undefined,
+  applicationState: 'open'
 });
 
 const emit = defineEmits<{
@@ -155,6 +128,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 select:first-child {
   margin-right: 5px;
 }

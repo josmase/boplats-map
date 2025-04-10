@@ -1,6 +1,7 @@
 import { expect } from "@std/expect";
 import { ApartmentQueryHelper } from "./apartment-query.helper.ts";
 import { describe, it } from "@std/testing/bdd";
+import type { GetApartmentRequest } from "./requests/get-apartment.request.ts";
 
 Deno.test("ApartmentQueryHelper", (t) => {
   describe("createQueryFromRequest", () => {
@@ -99,5 +100,26 @@ Deno.test("ApartmentQueryHelper", (t) => {
         },
       );
     });
+    [{
+      query: { applicationState: "open" },
+      expectedQuery: { applicationState: { $in: ["open"] } },
+    }, {
+      query: { applicationState: "closed" },
+      expectedQuery: { applicationState: { $in: ["closed"] } },
+    }, {
+      query: { applicationState: "all" },
+      expectedQuery: {  },
+    }].forEach(({ query, expectedQuery }) => {
+      it(
+        `should create query with correct argument when applicationState is ${
+          JSON.stringify(query)
+        }`,
+        () => {
+          const apartmentQueryHelper = new ApartmentQueryHelper();
+          const result = apartmentQueryHelper.createQueryFromRequest(query as GetApartmentRequest);
+          expect(result).toEqual(expectedQuery);
+        },
+      );
+    }
   });
 });

@@ -52,4 +52,5 @@ export interface ApartmentDto {
   roomCount?: number;
   publishedAt?: Date;
   location: GeocodingFeatureDto;
+  applicationState: "open" | "closed";
 }
