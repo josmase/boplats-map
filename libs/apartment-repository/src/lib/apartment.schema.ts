@@ -32,6 +32,12 @@ const ApartmentSchema = new Schema<Apartment>(
       type: Object,
       required: true,
     },
+    applicationState: {
+      type: String,
+      enum: ["open", "closed"],
+      default: "open",
+      required: true,
+    },
   },
   { timestamps: true },
 );

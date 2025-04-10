@@ -50,5 +50,6 @@ function parseApartment(
     floor: parseFloor(floorInfo),
     roomCount: parseRoomCount(roomCount),
     publishedAt: parsePublicationDate(publDate, new Date()),
+    applicationState: "open",
   };
 }

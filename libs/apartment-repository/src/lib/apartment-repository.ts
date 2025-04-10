@@ -6,6 +6,20 @@ export class ApartmentRepository {
     private readonly model: Model<Apartment>,
   ) {}
 
+  async findById(_id: string): Promise<Apartment | null> {
+    try {
+      console.info(`Fetching apartment by ID: ${_id}`);
+      const result = await this.model.findById(_id);
+      if (!result) {
+        console.warn(`Apartment with ID ${_id} not found`);
+        return null;
+      }
+      return result;
+    } catch (error) {
+      throw new Error(`Error fetching apartment by ID: ${error}`);
+    }
+  }
+
   async upsertApartment(
     apartmentData: Partial<Apartment>,
   ): Promise<Apartment | null> {

@@ -1,5 +1,8 @@
 import type { GeocodingFeature } from "@new-new-boplats/geocoding";
 import type { Document } from "mongoose";
+
+export type ApartmentApplicationState = "open" | "closed";
+
 export interface Apartment extends Document {
   link: string;
   imageUrls: string[];
@@ -13,6 +16,7 @@ export interface Apartment extends Document {
   updatedAt: Date;
   createdAt: Date;
   location: GeocodingFeature;
+  applicationState: ApartmentApplicationState;
 }
 
 export interface Price {

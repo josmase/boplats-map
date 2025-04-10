@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "start": "deno run --unstable-detect-cjs --allow-env --allow-read --allow-net --allow-sys src/main.ts",
+    "start": "deno run --allow-env --allow-read --allow-net --allow-sys src/main.ts",
     "install": "deno install --entrypoint src/main.ts"
   },
   "imports": {

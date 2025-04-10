@@ -1,14 +1,14 @@
 import {
   Apartment,
-  ApartmentRepository,
+  type ApartmentRepository,
 } from "@new-new-boplats/apartment-repository";
 
-import { GeocodingService } from "@new-new-boplats/geocoding";
+import { type GeocodingService } from "@new-new-boplats/geocoding";
 import { ScraperConfiguration } from "./config/scraper.configuration.ts";
 import { mapApartmentToStructuredQuery } from "./helper.ts";
 import { scrapeApartments } from "@new-new-boplats/apartment-scraper";
 
-export default class ApartmentService {
+export default class NewApartmentService {
   constructor(
     private readonly config: ScraperConfiguration,
     private readonly apartmentRepository: ApartmentRepository,
@@ -22,7 +22,7 @@ export default class ApartmentService {
         apartments,
       );
       const pendingApartments = apartmentsWithFeatures.map((apartment) =>
-        this.apartmentRepository.upsertApartment(apartment)
+        this.upsertApartment(apartment)
       );
       await Promise.all(pendingApartments);
     } catch (error) {
@@ -48,5 +48,19 @@ export default class ApartmentService {
       }
     }
     return apartmentFeatures;
+  }
+
+  private upsertApartment(
+    apartment: Partial<Apartment>,
+  ): Promise<Apartment | null> {
+    try {
+      return this.apartmentRepository.upsertApartment(apartment);
+    } catch (error) {
+      console.error(
+        `Error upserting apartment: ${apartment.link}`,
+        error,
+      );
+      return Promise.resolve(null);
+    }
   }
 }
