@@ -33,14 +33,14 @@ function placeableApartments(apartments: ApartmentDto[]) {
 
 <template>
   <div class="container">
-    <div class="filter">
-      <ApartmentForm @submit="handleFormSubmit" />
-    </div>
     <div v-if="responseData" class="map">
       <ApartmentMap :apartments="placeableApartments(responseData)" />
     </div>
     <div v-if="error">
       <p>Error: {{ error }}</p>
+    </div>
+    <div class="filter">
+      <ApartmentForm @submit="handleFormSubmit" />
     </div>
   </div>
 </template>
