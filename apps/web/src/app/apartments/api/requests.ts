@@ -7,4 +7,5 @@ export interface GetApartmentRequest {
   rentMax?: number;
   sizeMin?: number;
   sizeMax?: number;
+  applicationState?: "open" | "closed" | "all";
 }

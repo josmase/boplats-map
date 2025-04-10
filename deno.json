@@ -4,10 +4,12 @@
     "./apps/web",
     "./apps/scraper",
     "./apps/api",
+    "./libs/apartment-application-state-scraper",
     "./libs/apartment-repository",
     "./libs/apartment-scraper",
     "./libs/geocoding",
-    "./libs/mongoose"
+    "./libs/mongoose",
+    "./libs/rate-limit"
   ],
   "tasks": {
     "start:web": "deno task --cwd apps/web dev",

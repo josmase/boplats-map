@@ -3,7 +3,7 @@ import type { GetApartmentRequest } from "./requests/get-apartment.request.ts";
 import type { FilterQuery } from "mongoose";
 
 interface DateQuery {
-  updatedAt?: {
+  createdAt?: {
     $gte?: Date;
     $lte?: Date;
   };
@@ -30,6 +30,12 @@ interface SizeQuery {
   };
 }
 
+interface ApplicationStateQuery {
+  applicationState?: {
+    $in: string[];
+  };
+}
+
 export class ApartmentQueryHelper {
   createQueryFromRequest(
     request: GetApartmentRequest,
@@ -39,6 +45,7 @@ export class ApartmentQueryHelper {
       ...this.buildRoomsQuery(request),
       ...this.buildPriceQuery(request),
       ...this.buildSizeQuery(request),
+      ...this.buildApplicationStateQuery(request),
     };
 
     console.debug(`Converted request to query:`, request, query);
@@ -53,10 +60,10 @@ export class ApartmentQueryHelper {
 
     const query: DateQuery = {};
     if (request.dateStart) {
-      query.updatedAt = { $gte: request.dateStart };
+      query.createdAt = { $gte: request.dateStart };
     }
     if (request.dateEnd) {
-      query.updatedAt = { ...query.updatedAt, $lte: request.dateEnd };
+      query.createdAt = { ...query.createdAt, $lte: request.dateEnd };
     }
     return query;
   }
@@ -107,6 +114,20 @@ export class ApartmentQueryHelper {
       query["size.amount"] = { ...query["size.amount"], $lte: request.sizeMax };
     }
 
+    return query;
+  }
+
+  private buildApplicationStateQuery(
+    request?: GetApartmentRequest,
+  ): ApplicationStateQuery {
+    if (!request || request.applicationState === "all") {
+      return {};
+    }
+
+    const query: ApplicationStateQuery = {};
+    if (request.applicationState) {
+      query.applicationState = { $in: [request.applicationState] };
+    }
     return query;
   }
 }
