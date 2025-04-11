@@ -1,8 +1,18 @@
-## 0.0.19
+
+
+## 0.0.21
 
 * 1d48e2e Increase reachability of filter
 * d30d5c9 Default to only open instead of by date
 * cc79da4 Add update of application state when scraping
+
+## 0.0.20
+
+debug release script
+
+## 0.0.19
+
+debug release script
 
 ## 0.0.18
 
