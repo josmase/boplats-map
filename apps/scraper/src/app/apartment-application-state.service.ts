@@ -13,7 +13,7 @@ export default class ApartmentApplicationStateService {
     ) {}
 
     async updateApplicationStateForAllCurrentlyOpenApartments() {
-        const apartments = await this.getCurrentlyOpenApartments();
+        const apartments = await this.getCurrentlyNonClosedApartments();
         await rateLimit(
             apartments.map((apartment) => () =>
                 this.updateApartmentApplicationState(apartment)
@@ -22,12 +22,12 @@ export default class ApartmentApplicationStateService {
         );
     }
 
-    private async getCurrentlyOpenApartments(): Promise<Apartment[]> {
+    private async getCurrentlyNonClosedApartments(): Promise<Apartment[]> {
         try {
             console.info("Fetching currently open apartments");
             const openApartments = await this.apartmentRepository
                 .searchApartments({
-                    applicationState: "open",
+                    applicationState: { $ne: "closed" },
                 });
             console.info(`Found ${openApartments.length} open apartments`);
             return openApartments;
@@ -54,6 +54,16 @@ export default class ApartmentApplicationStateService {
                 );
                 apartment.applicationState = applicationState;
                 await this.apartmentRepository.upsertApartment(apartment);
+            } else if (applicationState === "open") {
+                console.info(
+                    `Updating application state for apartment ${apartment.link} to open`,
+                );
+                apartment.applicationState = applicationState;
+                await this.apartmentRepository.upsertApartment(apartment);
+            } else {
+                console.info(
+                    `No update needed for apartment ${apartment.link}, current state: ${applicationState}`,
+                );
             }
         } catch (error) {
             console.error(
