@@ -1,3 +1,9 @@
+## 0.0.22
+
+* 641de72 Revert the changelog
+* ccf2788 Update changelog for 0.0.22 (#211)
+* 4a52790 Check all non closed instead of only open
+
 ## 0.0.21
 
 * 1d48e2e Increase reachability of filter
