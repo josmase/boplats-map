@@ -1,3 +1,7 @@
+## 0.0.22
+
+* 4a52790 Check all non closed instead of only open
+
 
 
 ## 0.0.21
