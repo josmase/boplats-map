@@ -1,9 +1,3 @@
-## 0.0.22
-
-* 4a52790 Check all non closed instead of only open
-
-
-
 ## 0.0.21
 
 * 1d48e2e Increase reachability of filter
