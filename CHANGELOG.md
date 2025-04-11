@@ -1,3 +1,9 @@
+## 0.0.19
+
+* 1d48e2e Increase reachability of filter
+* d30d5c9 Default to only open instead of by date
+* cc79da4 Add update of application state when scraping
+
 ## 0.0.18
 
 * 29018b0 Add darkmode to map
