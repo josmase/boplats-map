@@ -1,0 +1,12 @@
+{
+    "imports": {
+        "vite": "npm:vite",
+        "vue": "npm:vue",
+        "@vitejs/plugin-vue": "npm:@vitejs/plugin-vue",
+        "vite-plugin-pwa": "npm:vite-plugin-pwa",
+        "@vue-leaflet/vue-leaflet": "npm:@vue-leaflet/vue-leaflet",
+        "leaflet": "npm:leaflet",
+        "axios": "npm:axios",
+        "@vite-pwa/assets-generator": "npm:@vite-pwa/assets-generator"
+    }
+}
