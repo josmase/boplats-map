@@ -1,3 +1,9 @@
+## 0.0.23
+
+* 2d79743 Add PWA
+* 9bde2af Maybe fix filter hidden by address bar on mobile
+* c203782 Use zsh as default shell
+
 ## 0.0.22
 
 * 641de72 Revert the changelog
