@@ -14,6 +14,8 @@
   "tasks": {
     "start:web": "deno task --cwd apps/web dev",
     "build:web": "deno task --cwd apps/web build",
+    "generate-assets:web": "deno task --cwd apps/web generate-pwa-assets",
+
 
     "start:api": "deno task --cwd apps/api start",
     "build:api": "deno task --cwd apps/api install",

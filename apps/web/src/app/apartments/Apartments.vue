@@ -20,7 +20,7 @@ function placeableApartments(apartments: ApartmentDto[]) {
 
 <style scoped>
 .container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-flow: column;
 }
