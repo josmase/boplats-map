@@ -20,6 +20,9 @@ export default class ApartmentApplicationStateService {
             ),
             this.scraperConfiguration.timeBetweenRequestsMs,
         );
+        console.info(
+            "Finished updating application state for all currently open apartments",
+        );
     }
 
     private async getCurrentlyNonClosedApartments(): Promise<Apartment[]> {
@@ -77,5 +80,6 @@ export default class ApartmentApplicationStateService {
                 error,
             );
         }
+        return Promise.resolve();
     }
 }

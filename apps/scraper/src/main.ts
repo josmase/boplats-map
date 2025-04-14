@@ -32,6 +32,8 @@ async function main() {
   } catch (error) {
     console.error("Error updating apartment application state:", error);
   }
+  console.info("Finished scraping and updating apartments.");
 }
 
-main();
+await main();
+Deno.exit(0);
