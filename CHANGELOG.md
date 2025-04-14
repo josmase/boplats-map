@@ -1,3 +1,7 @@
+## 0.0.25
+
+* 5cdfe0a Manually exit after scraping
+
 ## 0.0.24
 
 * 7cae02c Decrease rate limit
