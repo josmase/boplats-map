@@ -1,3 +1,8 @@
+## 0.0.24
+
+* 7cae02c Decrease rate limit
+* 1a02c1e Include only old apartments
+
 ## 0.0.23
 
 * 2d79743 Add PWA
