@@ -30,6 +30,7 @@ export class ApartmentRepository {
         apartmentData,
         { upsert: true, new: true },
       );
+      console.info(`Upserted apartment: ${apartmentData.link}`);
 
       return result;
     } catch (error) {
