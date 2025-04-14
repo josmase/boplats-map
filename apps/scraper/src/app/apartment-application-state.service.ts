@@ -24,10 +24,16 @@ export default class ApartmentApplicationStateService {
 
     private async getCurrentlyNonClosedApartments(): Promise<Apartment[]> {
         try {
-            console.info("Fetching currently open apartments");
+            console.info(
+                "Fetching open apartments published more than 5 days ago",
+            );
+            const fiveDaysAgo = new Date();
+            fiveDaysAgo.setDate(fiveDaysAgo.getDate() - 5);
+
             const openApartments = await this.apartmentRepository
                 .searchApartments({
                     applicationState: { $ne: "closed" },
+                    publishedAt: { $lt: fiveDaysAgo },
                 });
             console.info(`Found ${openApartments.length} open apartments`);
             return openApartments;
