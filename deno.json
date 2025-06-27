@@ -23,7 +23,8 @@
     "start:scraper": "deno task --cwd apps/scraper start",
     "build:scraper": "deno task --cwd apps/scraper install",
 
-    "coverage:all": "deno test --coverage && deno coverage --lcov --output=cov.lcov"
+    "coverage:all": "deno test --coverage && deno coverage --lcov --output=cov.lcov",
+    "generate-import-map": "deno run --allow-write --allow-read --allow-run --allow-net --allow-env scripts/generate_import_map.ts"
   },
   "imports": {
     "@std/expect": "jsr:@std/expect@^1.0.8",
