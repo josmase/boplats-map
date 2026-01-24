@@ -5,11 +5,9 @@ import {
   parsePublicationDate,
   parseSize,
 } from "./apartment-parser-helpers.ts";
-import { expect } from "@std/expect";
-import { stub } from "@std/testing/mock";
-import { describe, it } from "@std/testing/bdd";
+import { expect, spyOn, describe, it } from "bun:test";
 
-Deno.test("ApartmentParserHelpers", () => {
+describe("ApartmentParserHelpers", () => {
   describe("parsePrice", () => {
     it("should parse a valid price string", () => {
       const validPriceString = "10 000 kr";
@@ -39,14 +37,13 @@ Deno.test("ApartmentParserHelpers", () => {
     );
 
     it("should log a warning for an invalid price string", () => {
-      const warnSpy = stub(console, "warn", () => {});
+      const warnSpy = spyOn(console, "warn");
       const invalidPriceString = "invalid price";
       parsePrice(invalidPriceString);
       expect(warnSpy).toHaveBeenCalledWith(
         "Unable to parse price:",
         invalidPriceString,
       );
-      warnSpy.restore();
     });
   });
 
@@ -83,14 +80,13 @@ Deno.test("ApartmentParserHelpers", () => {
     );
 
     it("should log a warning for an invalid size string", () => {
-      const warnSpy = stub(console, "warn", () => {});
+      const warnSpy = spyOn(console, "warn");
       const invalidSizeString = "invalid size";
       parseSize(invalidSizeString);
       expect(warnSpy).toHaveBeenCalledWith(
         "Unable to parse size:",
         invalidSizeString,
       );
-      warnSpy.restore();
     });
   });
 
@@ -124,7 +120,7 @@ Deno.test("ApartmentParserHelpers", () => {
     });
 
     it("should log a warning for an invalid date string", () => {
-      const warnSpy = stub(console, "warn", () => {});
+      const warnSpy = spyOn(console, "warn");
       const today = new Date();
       const invalidDateString = "invalid date";
       parsePublicationDate(invalidDateString, today);
@@ -132,7 +128,6 @@ Deno.test("ApartmentParserHelpers", () => {
         "Unable to parse date:",
         invalidDateString,
       );
-      warnSpy.restore();
     });
   });
 
@@ -157,13 +152,12 @@ Deno.test("ApartmentParserHelpers", () => {
 
     it("should log a warning for an invalid floor string", () => {
       const invalidFloorString = "invalid floor";
-      const warnSpy = stub(console, "warn", () => {});
+      const warnSpy = spyOn(console, "warn");
       parseFloor(invalidFloorString);
       expect(warnSpy).toHaveBeenCalledWith(
         "Unable to parse floor:",
         invalidFloorString,
       );
-      warnSpy.restore();
     });
   });
 });

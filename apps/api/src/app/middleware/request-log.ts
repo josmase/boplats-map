@@ -1,32 +1,13 @@
-import { Context, Middleware } from "@oak/oak";
-import * as colors from "@std/fmt/colors";
+import chalk from "chalk";
 
-export function requestLogMiddleware(): Middleware {
-  return async (ctx, next) => {
-    const start = performance.now();
-    await next();
-    const diff = performance.now() - start;
+export function requestLogMiddleware(req: Request, response: Response, duration: number) {
+  const url = new URL(req.url);
+  const status = response.status;
+  const statusColor = status >= 400 ? chalk.red : status >= 300 ? chalk.yellow : chalk.green;
 
-    console.info(
-      `${statusCode(ctx)} ${duration(diff)} - ${request(ctx)}`,
-    );
-  };
-}
-
-function request(ctx: Context) {
-  const requestBody = ctx.request.hasBody
-    ? `${JSON.stringify(ctx.request.body).slice(0, 100)}...`
-    : "";
-  const responseBody = ctx.response.body
-    ? JSON.stringify(ctx.response.body).slice(0, 100)
-    : "";
-
-  return `${
-    colors.cyan(
-      `${ctx.request.url} ${requestBody} ${responseBody}`
-        .trim(),
-    )
-  }`;
+  console.info(
+    `${statusColor(status)} ${chalk.gray(`${duration.toFixed(2)}ms`)} - ${chalk.cyan(req.method)} ${chalk.cyan(url.pathname)}`,
+  );
 }
 
 function duration(diff: number) {
@@ -42,8 +23,8 @@ function statusCode(ctx: Context) {
 
 function getStatusCodeColor(ctx: Context) {
   return ctx.response.status >= 500
-    ? colors.red
+    ? chalk.red
     : ctx.response.status >= 400
-    ? colors.yellow
-    : colors.green;
+    ? chalk.yellow
+    : chalk.green;
 }

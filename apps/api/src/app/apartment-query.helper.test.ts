@@ -1,9 +1,8 @@
-import { expect } from "@std/expect";
+import { expect, describe, it } from "bun:test";
 import { ApartmentQueryHelper } from "./apartment-query.helper.ts";
-import { describe, it } from "@std/testing/bdd";
 import type { GetApartmentRequest } from "./requests/get-apartment.request.ts";
 
-Deno.test("ApartmentQueryHelper", (t) => {
+describe("ApartmentQueryHelper", () => {
   describe("createQueryFromRequest", () => {
     [{
       query: {
@@ -120,6 +119,6 @@ Deno.test("ApartmentQueryHelper", (t) => {
           expect(result).toEqual(expectedQuery);
         },
       );
-    }
+    });
   });
 });

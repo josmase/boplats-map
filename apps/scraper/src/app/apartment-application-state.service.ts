@@ -2,8 +2,8 @@ import {
     Apartment,
     type ApartmentRepository,
 } from "@new-new-boplats/apartment-repository";
-import { getApplicationStateForApartment } from "@new-new-boplats/apartment-application-state-scraper";
-import { rateLimit } from "@new-new-boplats/rate-limit";
+import { getApplicationStateForApartment } from "@boplats/apartment-application-state-scraper";
+import { rateLimit } from "@boplats/rate-limit";
 import type { ScraperConfiguration } from "./config/scraper.configuration.ts";
 
 export default class ApartmentApplicationStateService {

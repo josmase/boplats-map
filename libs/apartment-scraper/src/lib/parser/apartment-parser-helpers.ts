@@ -3,7 +3,7 @@ import type {
   Floor,
   Price,
   Size,
-} from "../../../../apartment-repository/src/mod.ts";
+} from "../../../../apartment-repository/src/index.ts";
 
 export function parsePrice(price: string): Price | undefined {
   const regex = /^(\d[\d\s]*)\s+(\w+)$/;

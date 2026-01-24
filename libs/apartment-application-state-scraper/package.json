@@ -1,0 +1,10 @@
+{
+  "name": "@boplats/apartment-application-state-scraper",
+  "version": "0.0.25",
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "date-fns": "^4.1.0"
+  }
+}

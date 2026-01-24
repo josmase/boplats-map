@@ -1,9 +1,9 @@
-import type { Apartment } from "@new-new-boplats/apartment-repository";
+import type { Apartment } from "@boplats/apartment-repository";
 import type { GetApartmentRequest } from "./requests/get-apartment.request.ts";
 import type { FilterQuery } from "mongoose";
 
 interface DateQuery {
-  createdAt?: {
+  updatedAt?: {
     $gte?: Date;
     $lte?: Date;
   };
@@ -60,10 +60,10 @@ export class ApartmentQueryHelper {
 
     const query: DateQuery = {};
     if (request.dateStart) {
-      query.createdAt = { $gte: request.dateStart };
+      query.updatedAt = { $gte: request.dateStart };
     }
     if (request.dateEnd) {
-      query.createdAt = { ...query.createdAt, $lte: request.dateEnd };
+      query.updatedAt = { ...query.updatedAt, $lte: request.dateEnd };
     }
     return query;
   }

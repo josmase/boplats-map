@@ -1,0 +1,19 @@
+{
+  "name": "scraper",
+  "version": "0.0.25",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/main.ts",
+    "test": "bun test",
+    "build": "bun run --compile src/main.ts --outfile dist/scraper"
+  },
+  "dependencies": {
+    "@boplats/apartment-repository": "workspace:*",
+    "@boplats/apartment-scraper": "workspace:*",
+    "@boplats/apartment-application-state-scraper": "workspace:*",
+    "@boplats/geocoding": "workspace:*",
+    "@boplats/mongoose": "workspace:*",
+    "@boplats/rate-limit": "workspace:*",
+    "mongoose": "^8.8.3"
+  }
+}

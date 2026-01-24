@@ -1,5 +1,5 @@
 import type * as cheerio from "cheerio";
-import type { Apartment } from "../../../../apartment-repository/src/mod.ts";
+import type { Apartment } from "../../../../apartment-repository/src/index.ts";
 import {
   parseFloor,
   parsePrice,
@@ -21,7 +21,6 @@ export function parseApartments($: cheerio.CheerioAPI): Partial<Apartment>[] {
 
 function parseApartment(
   $: cheerio.CheerioAPI,
-  // deno-lint-ignore no-explicit-any
   resultItem: any,
 ): Partial<Apartment> {
   const link = $(resultItem).find(".search-result-link").attr("href");

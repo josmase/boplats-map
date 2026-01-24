@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "lib": [
+            "ES2020"
+        ],
+        "types": [
+            "bun-types"
+        ],
+        "strict": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@boplats/apartment-repository": [
+                "libs/apartment-repository/src"
+            ],
+            "@boplats/apartment-scraper": [
+                "libs/apartment-scraper/src"
+            ],
+            "@boplats/apartment-application-state-scraper": [
+                "libs/apartment-application-state-scraper/src"
+            ],
+            "@boplats/geocoding": [
+                "libs/geocoding/src"
+            ],
+            "@boplats/mongoose": [
+                "libs/mongoose/lib"
+            ],
+            "@boplats/rate-limit": [
+                "libs/rate-limit/src"
+            ],
+            "@boplats/testing": [
+                "libs/testing/src"
+            ]
+        }
+    }
+}

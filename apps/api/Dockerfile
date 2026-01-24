@@ -1,8 +1,16 @@
-FROM artifactory.local.hejsan.xyz/docker/denoland/deno:2.1.4 as builder
+FROM oven/bun:latest AS builder
 
 WORKDIR /app
 
 COPY . .
 
-RUN deno task build:api
-CMD ["run",  "--unstable-detect-cjs", "--allow-env", "--allow-read", "--allow-net", "--allow-sys", "apps/api/src/main.ts"]
+RUN bun install --frozen-lockfile
+
+FROM oven/bun:slim
+WORKDIR /app
+COPY --from=builder /app/node_modules /app/node_modules
+COPY --from=builder /app/apps/api /app/apps/api
+COPY --from=builder /app/libs /app/libs
+
+EXPOSE 3000
+CMD ["bun", "run", "apps/api/src/main.ts"]
