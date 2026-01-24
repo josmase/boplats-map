@@ -14,4 +14,3 @@ dist
 dev-dist
 build
 .next
-cleanup-cronjob.yaml
