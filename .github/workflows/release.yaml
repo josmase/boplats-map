@@ -41,35 +41,31 @@ jobs:
             {
               name: new-new-boplats-web,
               image: new-new-boplats-web,
-              file-path: apps/production/new-new-boplats/web/deployment.yaml,
+              file-path: deploy/base/web/deployment.yaml,
               kind: deployment,
             },
             {
               name: new-new-boplats-scraper,
               image: new-new-boplats-scraper,
-              file-path: apps/production/new-new-boplats/scraper/cron.yaml,
+              file-path: deploy/base/scraper/cron.yaml,
               kind: cronjob,
             },
             {
               name: new-new-boplats-api,
               image: new-new-boplats-api,
-              file-path: apps/production/new-new-boplats/api/deployment.yaml,
+              file-path: deploy/base/api/deployment.yaml,
               kind: deployment,
             },
           ]
     needs: publish
-    uses: josmase/workflows/.github/workflows/deploy.yaml@main
+    uses: josmase/workflows/.github/workflows/deploy-in-repo.yaml@main
     with:
       image-version: ${{ github.ref_name }}
-      image-name: josmase/${{ matrix.project.image }}
+      image-name: artifactory.local.hejsan.xyz/docker/josmase/${{ matrix.project.image }}
       file-path: ${{ matrix.project.file-path }}
-      repository: josmase/flux
       namespace: default
       kind: ${{ matrix.project.kind }}
       name: ${{ matrix.project.name }}
-    secrets:
-      github-token: ${{ secrets.AUTO_DEPLOY_PAT }}
-      kubeconfig: ${{ secrets.KUBECONFIG }}
     permissions:
-      contents: read
+      contents: write
       deployments: write
