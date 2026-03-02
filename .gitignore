@@ -2,3 +2,7 @@ cov.lcov
 coverage
 .coverage
 node_modules
+dist
+dev-dist
+build
+.next

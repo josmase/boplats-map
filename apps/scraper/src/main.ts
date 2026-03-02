@@ -1,8 +1,8 @@
 import NewApartmentService from "./app/new-apartments.service.ts";
 import { scraperConfiguration } from "./app/config/scraper.configuration.ts";
-import { geoCodingService } from "@new-new-boplats/geocoding";
-import { apartmentRepository } from "@new-new-boplats/apartment-repository";
-import { mongooseModule } from "@new-new-boplats/mongoose";
+import { geoCodingService } from "@boplats/geocoding";
+import { apartmentRepository } from "@boplats/apartment-repository";
+import { mongooseModule } from "@boplats/mongoose";
 import ApartmentApplicationStateService from "./app/apartment-application-state.service.ts";
 
 async function main() {
@@ -36,4 +36,4 @@ async function main() {
 }
 
 await main();
-Deno.exit(0);
+process.exit(0);

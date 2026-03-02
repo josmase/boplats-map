@@ -1,5 +1,5 @@
-import { Apartment } from "@new-new-boplats/apartment-repository";
-import { StructuredQuery } from "@new-new-boplats/geocoding";
+import { Apartment } from "@boplats/apartment-repository";
+import { StructuredQuery } from "@boplats/geocoding";
 
 export function mapApartmentToStructuredQuery(
   apartment: Partial<Apartment>,

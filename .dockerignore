@@ -4,4 +4,13 @@ coverage
 .coverage
 Dockerfile
 docker-compose.yml
+docker-compose.yaml
 .vscode
+.devcontainer
+.github
+*.md
+*.log
+dist
+dev-dist
+build
+.next

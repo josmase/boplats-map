@@ -1,0 +1,9 @@
+{
+  "name": "@boplats/mongoose",
+  "version": "0.0.25",
+  "type": "module",
+  "exports": "./lib/index.ts",
+  "dependencies": {
+    "mongoose": "^8.8.3"
+  }
+}

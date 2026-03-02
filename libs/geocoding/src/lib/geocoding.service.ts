@@ -1,4 +1,4 @@
-import type { GeocodingFeature, StructuredQuery } from "../mod.ts";
+import type { GeocodingFeature, StructuredQuery } from "../index.ts";
 import type { NominatimConfiguration } from "./config/nominatim.configuration.ts";
 import type { KeyHasher } from "./key-hasher.ts";
 import type { GeocodingClient } from "./nominatim/geocoding.client.ts";

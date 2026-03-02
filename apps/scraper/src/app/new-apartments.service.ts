@@ -1,12 +1,12 @@
 import {
   Apartment,
   type ApartmentRepository,
-} from "@new-new-boplats/apartment-repository";
+} from "@boplats/apartment-repository";
 
-import { type GeocodingService } from "@new-new-boplats/geocoding";
+import { type GeocodingService } from "@boplats/geocoding";
 import { ScraperConfiguration } from "./config/scraper.configuration.ts";
 import { mapApartmentToStructuredQuery } from "./helper.ts";
-import { scrapeApartments } from "@new-new-boplats/apartment-scraper";
+import { scrapeApartments } from "@boplats/apartment-scraper";
 
 export default class NewApartmentService {
   constructor(
