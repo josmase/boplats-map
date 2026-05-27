@@ -1,0 +1,15 @@
+stages:
+  - validate
+
+validate:
+  stage: validate
+  image: alpine:latest
+  tags:
+    - kubernetes
+  before_script:
+    - apk add --no-cache yq
+  script:
+    - echo "Validating project structure..."
+    - test -f package.json && echo "  - package.json exists"
+    - test -f tsconfig.json && echo "  - tsconfig.json exists"
+    - yq eval --no-doc 'true' .gitlab-ci.yml > /dev/null && echo "  - .gitlab-ci.yml is valid"
