@@ -1,4 +1,4 @@
-## 0.0.25
+## 0.0.26* 5476ee9 feat: move deployment manifests to app repo* f4429b9 Remove unused dockerignore* f384bb2 Ignore some more files* 18e7321 Remove unused files* 3810c4c Migrate to bun## 0.0.25
 
 * 5cdfe0a Manually exit after scraping
 
