@@ -1,5 +1,11 @@
 stages:
   - validate
+  - release
+
+include:
+  - project: 'josmase/infrastructure/ci-templates'
+    ref: 'v1.0.0'
+    file: 'templates/tag-release.yml'
 
 validate:
   stage: validate
@@ -13,3 +19,11 @@ validate:
     - test -f package.json && echo "  - package.json exists"
     - test -f tsconfig.json && echo "  - tsconfig.json exists"
     - yq eval --no-doc 'true' .gitlab-ci.yml > /dev/null && echo "  - .gitlab-ci.yml is valid"
+
+release:
+  extends: .tag-release
+  stage: release
+  tags:
+    - kubernetes
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push"'
